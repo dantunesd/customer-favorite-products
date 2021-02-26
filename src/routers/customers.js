@@ -2,7 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.put('/:customerId?', (req, res) => {
+  res.json({ message: req.body });
+});
+
+router.get('/:customerId', (req, res) => {
   res.json({ message: 'hello word' });
 });
 
