@@ -28,28 +28,26 @@ Or if you have Nodejs installed:
 npm install
 ```
 
-Start application's services dependencies:
+Start the api's service dependencies
 
 ```bash
-docker-compose -f docker-compose-dependencies.yaml up
+docker-compose -f docker-compose-services.yaml up
 ```
 
 ---
 
-# Start API
+# Start API locally
 
-After running the commands at dependencies section, run the following command:
+Run the following command:
 
 ```bash
-docker-compose up
+docker-compose -f docker-compose-start-api.yaml up
 ```
 
-or 
+Or:
 
 ```bash
 node src/index.js
 ```
 
 ---
-
-
