@@ -1,3 +1,3 @@
-const { APP_PORT } = process.env;
+const { APP_NAME, APP_PORT, LOG_LEVEL } = process.env;
 
-module.exports = { APP_PORT };
+module.exports = { APP_NAME, APP_PORT, LOG_LEVEL };

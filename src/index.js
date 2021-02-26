@@ -1,13 +1,14 @@
 require('dotenv').config();
-
 const express = require('express');
-const enviroment = require('./infrastructure/enviroment');
+const { environment, logger } = require('./infrastructure');
 const customers = require('./routers/customers');
+
+express.json();
 
 const app = express();
 
 app.use('/customers', customers);
 
-app.listen(enviroment.APP_PORT, () => {
-  console.log(`API listening at http://localhost:${enviroment.APP_PORT}`);
+app.listen(environment.APP_PORT, () => {
+  logger.info(`API listening at http://localhost:${environment.APP_PORT}`);
 });
