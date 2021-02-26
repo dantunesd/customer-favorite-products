@@ -1,0 +1,16 @@
+{
+  "name": "customer-favorite-products",
+  "version": "1.0.0",
+  "description": "An API to manages customers and their favorite products",
+  "author": "diney.dla@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dantunesd/customer-favorite-products.git"
+  },
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
