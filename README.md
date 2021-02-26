@@ -9,7 +9,7 @@ An API to manages customers and their favorite products
 
 * Docker Compose ^1.25
 
-* Nodejs ^14.16 (optional)
+* NPM + Nodejs ^14.16 (optional)
 
 P.S.: if you have nvm installed in your machine, just run `nvm install` command to get the correct NodeJs version.
 
@@ -22,7 +22,7 @@ Run the following command to install npm dependencies:
 ```bash
 docker-compose -f docker-compose-npm-install.yaml up
 ```
-Or if you have Nodejs installed: 
+Or if you have npm installed: 
 
 ```bash
 npm install
@@ -44,7 +44,7 @@ Run the following command:
 docker-compose -f docker-compose-start-api.yaml up
 ```
 
-Or:
+Or if you have NodeJS installed:
 
 ```bash
 node src/index.js
