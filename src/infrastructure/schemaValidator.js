@@ -5,10 +5,10 @@ const ajv = new Ajv({
   allErrors: true,
 });
 
-function validateSchemma(schema, data) {
+function validateSchema(schema, data) {
   if (!ajv.validate(schema, data)) {
     throw new ValidationError(JSON.stringify(ajv.errors));
   }
 }
 
-module.exports = validateSchemma;
+module.exports = validateSchema;
