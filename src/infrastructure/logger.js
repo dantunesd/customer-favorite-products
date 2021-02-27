@@ -5,7 +5,7 @@ const enviroment = require('./enviroment');
 const logger = winston.createLogger({
   level: enviroment.LOG_LEVEL,
   defaultMeta: { application: enviroment.APP_NAME },
-  format: ecsFormat(),
+  format: ecsFormat({ convertReqRes: true }),
   transports: [new winston.transports.Console()],
 });
 
