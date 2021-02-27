@@ -1,19 +1,49 @@
+/* eslint-disable prettier/prettier */
+const { MongoError, ObjectID } = require('mongodb');
+
+const DuplicatedEmailError = require('../errors/DuplicatedEmailError');
+const CustomerNotFoundError = require('../errors/CustomerNotFoundError');
+
+const duplicateErrorMessage = 'duplicate key error collection';
+
 class Customers {
   constructor(client) {
     this.client = client;
   }
 
   async create(customerData) {
-    await this.client.connect();
-
     const collection = this.client
       .db('customerFavoriteProductsDB')
       .collection('customersFavoriteProducts');
 
-    const res = await collection.insertOne(customerData);
+    try {
+      await collection.insertOne(customerData);
+    } catch (error) {
+      if (
+        error instanceof MongoError
+        && error.message.includes(duplicateErrorMessage)
+      ) {
+        throw new DuplicatedEmailError();
+      }
+      throw error;
+    }
+  }
 
-    // eslint-disable-next-line no-console
-    console.log(res);
+  async find(customerId) {
+    const collection = this.client
+      .db('customerFavoriteProductsDB')
+      .collection('customersFavoriteProducts');
+
+    const result = await collection.findOne(
+      { _id: ObjectID(customerId) },
+      { projection: { _id: true, name: true, email: true } },
+    );
+
+    if (!result) {
+      throw new CustomerNotFoundError();
+    }
+
+    return result;
   }
 }
 

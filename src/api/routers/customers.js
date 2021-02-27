@@ -15,7 +15,7 @@ router.post('/', async (req, res, next) => {
   }
 
   res.status(201);
-  res.json({ body: req.body });
+  res.json(req.body);
 
   return next();
 });
@@ -29,15 +29,20 @@ router.put('/:customerId', (req, res, next) => {
     return next(error);
   }
 
-  res.json({ body: req.body, customerId });
+  res.json({ customerId });
 
   return next();
 });
 
-router.get('/:customerId', (req, res, next) => {
+router.get('/:customerId', async (req, res, next) => {
   const { customerId } = req.params;
 
-  res.json({ customerId });
+  try {
+    const customer = await customersService.findCustomer(customerId);
+    res.json(customer);
+  } catch (error) {
+    return next(error);
+  }
 
   return next();
 });
