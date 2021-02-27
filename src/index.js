@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const { environment, logger } = require('./infrastructure');
-const { requestLogger, errorHandler } = require('./middlewares');
-const customers = require('./routers/customers');
+const { requestLogger, errorHandler } = require('./application/middlewares');
+const customers = require('./application/routers/customers');
 
 const app = express();
 

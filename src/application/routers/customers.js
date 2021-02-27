@@ -1,5 +1,5 @@
 const express = require('express');
-const validateSchema = require('../infrastructure/schemaValidator');
+const validateSchema = require('../schemas/schemaValidator');
 const customerPutContent = require('../schemas/customerPutContent.json');
 
 const router = express.Router();
