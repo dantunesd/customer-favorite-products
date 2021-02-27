@@ -1,5 +1,5 @@
 const supertest = require('supertest');
-const app = require('../../src/application/express-app');
+const app = require('../../src/api/express-app');
 
 const newValidCustomer = {
   email: 'email@email.com',

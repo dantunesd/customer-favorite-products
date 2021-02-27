@@ -1,5 +1,5 @@
 const ApiProblem = require('api-problem');
-const ValidationError = require('../errors/ValidationError');
+const ValidationError = require('../../errors/ValidationError');
 
 function errorHandler(err, req, res, next) {
   let apiProblem;
@@ -11,13 +11,13 @@ function errorHandler(err, req, res, next) {
       break;
 
     default:
-      apiProblem = new ApiProblem(500, err.message);
+      apiProblem = new ApiProblem(500);
       break;
   }
 
   apiProblem.send(res);
 
-  return next();
+  return next(err);
 }
 
 module.exports = errorHandler;
