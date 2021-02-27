@@ -1,6 +1,6 @@
 const winston = require('winston');
 const ecsFormat = require('@elastic/ecs-winston-format');
-const enviroment = require('./enviroment');
+const enviroment = require('./environment');
 
 const logger = winston.createLogger({
   level: enviroment.LOG_LEVEL,

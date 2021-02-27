@@ -1,4 +1,4 @@
-const environment = require('./enviroment');
+const environment = require('./environment');
 const logger = require('./logger');
 
 module.exports = {
