@@ -13,6 +13,11 @@ router.put('/:customerId?', (req, res, next) => {
     return next(error);
   }
 
+  res.status(201);
+  if (customerId) {
+    res.status(200);
+  }
+
   res.json({ body: req.body, customerId });
 
   return next();
