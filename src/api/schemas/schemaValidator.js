@@ -1,5 +1,5 @@
 const Ajv = require('ajv').default;
-const ValidationError = require('../errors/ValidationError');
+const ValidationError = require('../../errors/ValidationError');
 
 const ajv = new Ajv({
   allErrors: true,
