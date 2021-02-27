@@ -27,7 +27,7 @@ describe('POST /customers', () => {
     });
   });
 
-  describe('given a invalid CUSTOMER', () => {
+  describe('given a invalid customer', () => {
     it('should return 400', async () => {
       const result = await supertest(app)
         .post('/customers/')
@@ -49,7 +49,7 @@ describe('PUT /customers/:customerId', () => {
     });
   });
 
-  describe('given a invalid CUSTOMER', () => {
+  describe('given a invalid customer', () => {
     it('should return 400', async () => {
       const result = await supertest(app)
         .put('/customers/1/')
