@@ -4,9 +4,7 @@ const customerPutContent = require('../schemas/customerPutContent.json');
 
 const router = express.Router();
 
-router.put('/:customerId?', (req, res, next) => {
-  const { customerId } = req.params;
-
+router.post('/', (req, res, next) => {
   try {
     validateSchema(customerPutContent, req.body);
   } catch (error) {
@@ -14,8 +12,18 @@ router.put('/:customerId?', (req, res, next) => {
   }
 
   res.status(201);
-  if (customerId) {
-    res.status(200);
+  res.json({ body: req.body });
+
+  return next();
+});
+
+router.put('/:customerId', (req, res, next) => {
+  const { customerId } = req.params;
+
+  try {
+    validateSchema(customerPutContent, req.body);
+  } catch (error) {
+    return next(error);
   }
 
   res.json({ body: req.body, customerId });
