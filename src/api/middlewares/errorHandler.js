@@ -1,14 +1,13 @@
 const ApiProblem = require('api-problem');
-const ValidationError = require('../../errors/ValidationError');
 const DuplicatedEmailError = require('../../errors/DuplicatedEmailError');
 const CustomerNotFoundError = require('../../errors/CustomerNotFoundError');
 
+// eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
   let apiProblem;
 
   switch (true) {
     case err instanceof SyntaxError:
-    case err instanceof ValidationError:
       apiProblem = new ApiProblem(400, err.message);
       break;
 
@@ -25,9 +24,7 @@ function errorHandler(err, req, res, next) {
       break;
   }
 
-  apiProblem.send(res);
-
-  return next(err);
+  return apiProblem.send(res);
 }
 
 module.exports = errorHandler;
