@@ -10,6 +10,10 @@ class CustomersService {
   async findCustomer(customerId) {
     return this.customersRepository.find(customerId);
   }
+
+  async deleteCustomer(customerId) {
+    return this.customersRepository.delete(customerId);
+  }
 }
 
 module.exports = CustomersService;

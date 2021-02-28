@@ -48,6 +48,17 @@ class CustomersRepository {
 
     return result;
   }
+
+  async delete(customerId) {
+    const collection = this.mongodbClient
+      .db(dbName)
+      .collection(collectionName);
+
+    await collection.deleteOne(
+      { _id: ObjectID(customerId) },
+      { projection: { _id: true, name: true, email: true } },
+    );
+  }
 }
 
 module.exports = CustomersRepository;
