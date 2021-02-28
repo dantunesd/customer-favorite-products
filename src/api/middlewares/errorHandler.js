@@ -7,6 +7,10 @@ function errorHandler(err, req, res, next) {
   let apiProblem;
 
   switch (true) {
+    case err instanceof ApiProblem:
+      apiProblem = err;
+      break;
+
     case err instanceof SyntaxError:
       apiProblem = new ApiProblem(400, err.message);
       break;

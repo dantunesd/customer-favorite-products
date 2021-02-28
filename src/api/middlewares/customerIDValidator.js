@@ -6,7 +6,7 @@ function customerIDValidator(req, res, next) {
 
   if (!ObjectId.isValid(customerId)) {
     const apiProblem = new ApiProblem(400, 'The customerId is invalid');
-    return apiProblem.send(res);
+    return next(apiProblem);
   }
 
   return next();

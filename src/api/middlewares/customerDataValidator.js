@@ -9,8 +9,8 @@ const ajv = new Ajv({
 
 function customerDataValidator(req, res, next) {
   if (!ajv.validate(customerSchema, req.body)) {
-    const apiProblem = new ApiProblem(400, JSON.stringify(ajv.errors));
-    return apiProblem.send(res);
+    const apiProblem = new ApiProblem(400, ajv.errorsText());
+    return next(apiProblem);
   }
 
   return next();
