@@ -6,15 +6,18 @@ const CustomerNotFoundError = require('../errors/CustomerNotFoundError');
 
 const duplicateErrorMessage = 'duplicate key error collection';
 
-class Customers {
-  constructor(client) {
-    this.client = client;
+const dbName = 'customerFavoriteProductsDB';
+const collectionName = 'customersFavoriteProducts';
+
+class CustomersRepository {
+  constructor(mongodbClient) {
+    this.mongodbClient = mongodbClient;
   }
 
   async create(customerData) {
-    const collection = this.client
-      .db('customerFavoriteProductsDB')
-      .collection('customersFavoriteProducts');
+    const collection = this.mongodbClient
+      .db(dbName)
+      .collection(collectionName);
 
     try {
       await collection.insertOne(customerData);
@@ -30,9 +33,9 @@ class Customers {
   }
 
   async find(customerId) {
-    const collection = this.client
-      .db('customerFavoriteProductsDB')
-      .collection('customersFavoriteProducts');
+    const collection = this.mongodbClient
+      .db(dbName)
+      .collection(collectionName);
 
     const result = await collection.findOne(
       { _id: ObjectID(customerId) },
@@ -47,4 +50,4 @@ class Customers {
   }
 }
 
-module.exports = Customers;
+module.exports = CustomersRepository;
