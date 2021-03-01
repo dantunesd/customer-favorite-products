@@ -3,10 +3,10 @@ require('dotenv').config();
 const supertest = require('supertest');
 const app = require('../../src/api/express-app');
 
-const validCustomer = {
+const validCustomer = () => ({
   email: `${new Date().getTime()}@email.com`,
   name: 'name lastname',
-};
+});
 
 const existingCustomer = {
   email: 'existing@email.com',
@@ -23,7 +23,7 @@ describe('POST /customers', () => {
     it('should return 201', async () => {
       const result = await supertest(app)
         .post('/customers/')
-        .send(validCustomer);
+        .send(validCustomer());
 
       expect(result.status).toEqual(201);
     });
@@ -80,6 +80,28 @@ describe('GET /customers/:customerId', () => {
   });
 });
 
+describe('PUT /customers/:customerId', () => {
+  describe('given a valid existing customer', () => {
+    it('should return 200', async () => {
+      const result = await supertest(app)
+        .put('/customers/603ae34e540e915345f00f2f')
+        .send(validCustomer());
+
+      expect(result.status).toEqual(200);
+    });
+  });
+
+  describe('given a invalid customer', () => {
+    it('should return 400', async () => {
+      const result = await supertest(app)
+        .put('/customers/invalid/')
+        .send(invalidCustomer);
+
+      expect(result.status).toEqual(400);
+    });
+  });
+});
+
 describe('DELETE /customers/:customerId', () => {
   describe('given an existing customer', () => {
     it('should return 200', async () => {
@@ -104,28 +126,6 @@ describe('DELETE /customers/:customerId', () => {
   describe('given an invalid customer', () => {
     it('should return 400', async () => {
       const result = await supertest(app).delete('/customers/invalid/').send();
-
-      expect(result.status).toEqual(400);
-    });
-  });
-});
-
-describe('PUT /customers/:customerId', () => {
-  describe('given a valid existing customer', () => {
-    it('should return 200', async () => {
-      const result = await supertest(app)
-        .put('/customers/603ae34e540e915345f00f2f')
-        .send(validCustomer);
-
-      expect(result.status).toEqual(200);
-    });
-  });
-
-  describe('given a invalid customer', () => {
-    it('should return 400', async () => {
-      const result = await supertest(app)
-        .put('/customers/invalid/')
-        .send(invalidCustomer);
 
       expect(result.status).toEqual(400);
     });
