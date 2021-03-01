@@ -62,7 +62,7 @@ describe('GET /customers/:customerId', () => {
   });
 
   describe('given an inexisting customer', () => {
-    it('should return 200', async () => {
+    it('should return 404', async () => {
       const result = await supertest(app)
         .get('/customers/inexistenttt/')
         .send();
@@ -74,6 +74,36 @@ describe('GET /customers/:customerId', () => {
   describe('given an invalid customer', () => {
     it('should return 400', async () => {
       const result = await supertest(app).get('/customers/invalid/').send();
+
+      expect(result.status).toEqual(400);
+    });
+  });
+});
+
+describe('DELETE /customers/:customerId', () => {
+  describe('given an existing customer', () => {
+    it('should return 200', async () => {
+      const result = await supertest(app)
+        .delete('/customers/603ae34e540e915345f00f2c/')
+        .send();
+
+      expect(result.status).toEqual(200);
+    });
+  });
+
+  describe('given an inexisting customer', () => {
+    it('should return 200', async () => {
+      const result = await supertest(app)
+        .delete('/customers/inexistenttt/')
+        .send();
+
+      expect(result.status).toEqual(200);
+    });
+  });
+
+  describe('given an invalid customer', () => {
+    it('should return 400', async () => {
+      const result = await supertest(app).delete('/customers/invalid/').send();
 
       expect(result.status).toEqual(400);
     });

@@ -56,7 +56,6 @@ class CustomersRepository {
 
     await collection.deleteOne(
       { _id: ObjectID(customerId) },
-      { projection: { _id: true, name: true, email: true } },
     );
   }
 }
