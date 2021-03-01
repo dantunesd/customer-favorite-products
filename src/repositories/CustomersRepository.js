@@ -54,9 +54,13 @@ class CustomersRepository {
       .db(dbName)
       .collection(collectionName);
 
-    await collection.deleteOne(
+    const deleteResult = await collection.deleteOne(
       { _id: ObjectID(customerId) },
     );
+
+    if (!deleteResult.result.n) {
+      throw new CustomerNotFoundError();
+    }
   }
 
   async update(customerId, customerData) {
@@ -65,7 +69,13 @@ class CustomersRepository {
       .collection(collectionName);
 
     try {
-      await collection.updateOne({ _id: ObjectID(customerId) }, { $set: customerData });
+      const updateResult = await collection.updateOne(
+        { _id: ObjectID(customerId) }, { $set: customerData },
+      );
+
+      if (!updateResult.result.n) {
+        throw new CustomerNotFoundError();
+      }
     } catch (error) {
       if (
         error instanceof MongoError
