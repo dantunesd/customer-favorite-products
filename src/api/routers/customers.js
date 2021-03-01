@@ -42,7 +42,7 @@ router.get('/:customerId', customerIdMiddleware, async (req, res, next) => {
   const { customerId } = req.params;
 
   try {
-    const customer = await customersService.findCustomer(customerId);
+    const customer = await customersService.getCustomer(customerId);
 
     res.json(customer);
   } catch (error) {

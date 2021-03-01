@@ -34,7 +34,7 @@ class CustomersRepository {
     }
   }
 
-  async find(customerId) {
+  async getById(customerId) {
     const collection = this.mongodbClient
       .db(dbName)
       .collection(collectionName);
@@ -51,7 +51,7 @@ class CustomersRepository {
     return findResult;
   }
 
-  async delete(customerId) {
+  async deleteById(customerId) {
     const collection = this.mongodbClient
       .db(dbName)
       .collection(collectionName);
@@ -65,7 +65,7 @@ class CustomersRepository {
     }
   }
 
-  async update(customerId, customerData) {
+  async updateById(customerId, customerData) {
     const collection = this.mongodbClient
       .db(dbName)
       .collection(collectionName);

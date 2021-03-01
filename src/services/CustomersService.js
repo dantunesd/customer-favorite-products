@@ -7,16 +7,16 @@ class CustomersService {
     return this.customersRepository.create(customerData);
   }
 
-  async findCustomer(customerId) {
-    return this.customersRepository.find(customerId);
+  async getCustomer(customerId) {
+    return this.customersRepository.getById(customerId);
   }
 
   async deleteCustomer(customerId) {
-    return this.customersRepository.delete(customerId);
+    return this.customersRepository.deleteById(customerId);
   }
 
   async updateCustomer(customerId, customerData) {
-    return this.customersRepository.update(customerId, customerData);
+    return this.customersRepository.updateById(customerId, customerData);
   }
 }
 
