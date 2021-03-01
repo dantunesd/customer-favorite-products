@@ -10,12 +10,12 @@ const dbName = 'customerFavoriteProductsDB';
 const collectionName = 'customersFavoriteProducts';
 
 class CustomersRepository {
-  constructor(mongodbClient) {
-    this.mongodbClient = mongodbClient;
+  constructor(mongoClient) {
+    this.mongoClient = mongoClient;
   }
 
   async create(customerData) {
-    const collection = this.mongodbClient
+    const collection = this.mongoClient
       .db(dbName)
       .collection(collectionName);
 
@@ -35,7 +35,7 @@ class CustomersRepository {
   }
 
   async getById(customerId) {
-    const collection = this.mongodbClient
+    const collection = this.mongoClient
       .db(dbName)
       .collection(collectionName);
 
@@ -52,7 +52,7 @@ class CustomersRepository {
   }
 
   async deleteById(customerId) {
-    const collection = this.mongodbClient
+    const collection = this.mongoClient
       .db(dbName)
       .collection(collectionName);
 
@@ -66,7 +66,7 @@ class CustomersRepository {
   }
 
   async updateById(customerId, customerData) {
-    const collection = this.mongodbClient
+    const collection = this.mongoClient
       .db(dbName)
       .collection(collectionName);
 
