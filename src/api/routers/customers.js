@@ -7,16 +7,13 @@ const customerIdMiddleware = require('../middlewares/customerIDValidator');
 const router = express.Router();
 
 router.post('/', customerDataMiddleware, async (req, res, next) => {
-  try {
-    const customerId = await customersService.createCustomer(req.body);
-
-    res.status(201);
-    res.json({ customerId });
-  } catch (error) {
-    return next(error);
-  }
-
-  return next();
+  customersService
+    .createCustomer(req.body)
+    .then((customerId) => {
+      res.status(201);
+      res.json({ customerId });
+    })
+    .catch(next);
 });
 
 router.put(
@@ -26,44 +23,35 @@ router.put(
   async (req, res, next) => {
     const { customerId } = req.params;
 
-    try {
-      await customersService.updateCustomer(customerId, req.body);
-
-      res.json();
-    } catch (error) {
-      return next(error);
-    }
-
-    return next();
+    customersService
+      .updateCustomer(customerId, req.body)
+      .then(() => {
+        res.json();
+      })
+      .catch(next);
   },
 );
 
 router.get('/:customerId', customerIdMiddleware, async (req, res, next) => {
   const { customerId } = req.params;
 
-  try {
-    const customer = await customersService.getCustomer(customerId);
-
-    res.json(customer);
-  } catch (error) {
-    return next(error);
-  }
-
-  return next();
+  customersService
+    .getCustomer(customerId)
+    .then((customer) => {
+      res.json(customer);
+    })
+    .catch(next);
 });
 
 router.delete('/:customerId', customerIdMiddleware, async (req, res, next) => {
   const { customerId } = req.params;
 
-  try {
-    const customer = await customersService.deleteCustomer(customerId);
-
-    res.json(customer);
-  } catch (error) {
-    return next(error);
-  }
-
-  return next();
+  customersService
+    .deleteCustomer(customerId)
+    .then((customer) => {
+      res.json(customer);
+    })
+    .catch(next);
 });
 
 module.exports = router;
