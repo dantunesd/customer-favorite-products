@@ -58,6 +58,24 @@ class CustomersRepository {
       { _id: ObjectID(customerId) },
     );
   }
+
+  async update(customerId, customerData) {
+    const collection = this.mongodbClient
+      .db(dbName)
+      .collection(collectionName);
+
+    try {
+      await collection.updateOne({ _id: ObjectID(customerId) }, { $set: customerData });
+    } catch (error) {
+      if (
+        error instanceof MongoError
+        && error.message.includes(duplicateErrorMessage)
+      ) {
+        throw new DuplicatedEmailError();
+      }
+      throw error;
+    }
+  }
 }
 
 module.exports = CustomersRepository;

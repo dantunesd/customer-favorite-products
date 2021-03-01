@@ -4,7 +4,7 @@ class CustomersService {
   }
 
   async createCustomer(customerData) {
-    await this.customersRepository.create(customerData);
+    return this.customersRepository.create(customerData);
   }
 
   async findCustomer(customerId) {
@@ -13,6 +13,10 @@ class CustomersService {
 
   async deleteCustomer(customerId) {
     return this.customersRepository.delete(customerId);
+  }
+
+  async updateCustomer(customerId, customerData) {
+    return this.customersRepository.update(customerId, customerData);
   }
 }
 

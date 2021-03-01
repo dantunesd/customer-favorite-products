@@ -21,10 +21,16 @@ router.put(
   '/:customerId',
   customerIdMiddleware,
   customerDataMiddleware,
-  (req, res, next) => {
+  async (req, res, next) => {
     const { customerId } = req.params;
 
-    res.json({ customerId });
+    try {
+      await customersService.updateCustomer(customerId, req.body);
+      res.status(200);
+      res.json();
+    } catch (error) {
+      return next(error);
+    }
 
     return next();
   },
