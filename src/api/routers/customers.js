@@ -8,12 +8,14 @@ const router = express.Router();
 
 router.post('/', customerDataMiddleware, async (req, res, next) => {
   try {
-    await customersService.createCustomer(req.body);
+    const customerId = await customersService.createCustomer(req.body);
+
     res.status(201);
-    res.json(req.body);
+    res.json({ customerId });
   } catch (error) {
     return next(error);
   }
+
   return next();
 });
 
@@ -26,7 +28,7 @@ router.put(
 
     try {
       await customersService.updateCustomer(customerId, req.body);
-      res.status(200);
+
       res.json();
     } catch (error) {
       return next(error);
@@ -41,6 +43,7 @@ router.get('/:customerId', customerIdMiddleware, async (req, res, next) => {
 
   try {
     const customer = await customersService.findCustomer(customerId);
+
     res.json(customer);
   } catch (error) {
     return next(error);
@@ -54,6 +57,7 @@ router.delete('/:customerId', customerIdMiddleware, async (req, res, next) => {
 
   try {
     const customer = await customersService.deleteCustomer(customerId);
+
     res.json(customer);
   } catch (error) {
     return next(error);

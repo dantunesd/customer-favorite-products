@@ -26,7 +26,7 @@ describe('POST /customers', () => {
         .send(validCustomer());
 
       expect(result.status).toEqual(201);
-      expect(result.body).toHaveProperty('_id');
+      expect(result.body).toHaveProperty('customerId');
     });
   });
 

@@ -20,7 +20,9 @@ class CustomersRepository {
       .collection(collectionName);
 
     try {
-      await collection.insertOne(customerData);
+      const insertResult = await collection.insertOne(customerData);
+
+      return insertResult.insertedId;
     } catch (error) {
       if (
         error instanceof MongoError
@@ -37,16 +39,16 @@ class CustomersRepository {
       .db(dbName)
       .collection(collectionName);
 
-    const result = await collection.findOne(
+    const findResult = await collection.findOne(
       { _id: ObjectID(customerId) },
       { projection: { _id: true, name: true, email: true } },
     );
 
-    if (!result) {
+    if (!findResult) {
       throw new CustomerNotFoundError();
     }
 
-    return result;
+    return findResult;
   }
 
   async delete(customerId) {
