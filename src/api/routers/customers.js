@@ -1,13 +1,13 @@
 const express = require('express');
 
-const favoriteProductsRouter = require('./favorite-products');
+const customersFavoriteProductsRouter = require('./customers-favorite-products');
 const customersService = require('../../factories/customersServiceFactory');
 const customerDataValidator = require('../middlewares/customerDataValidator');
 const customerIdValidator = require('../middlewares/customerIdValidator');
 
 const router = express.Router();
 
-router.use('/:customerId/favorite-products', favoriteProductsRouter);
+router.use('/:customerId/favorite-products', customersFavoriteProductsRouter);
 
 router.post('/', customerDataValidator, (req, res, next) => {
   customersService
