@@ -28,6 +28,16 @@ class FavoriteProductsRepository {
       return result;
     });
   }
+
+  async deleteByCustomerIdAndProductId(customerId, productId) {
+    const filter = { _id: ObjectID(customerId) };
+    const pull = { $pull: { favoriteProducts: { productId } } };
+
+    return this.collection.updateOne(filter, pull).then((result) => {
+      notFoundHandler(result.result.n, 'Customer');
+      notFoundHandler(result.result.nModified, 'ProductId');
+    });
+  }
 }
 
 module.exports = FavoriteProductsRepository;

@@ -34,4 +34,16 @@ router.get('/', customerIdValidator, (req, res, next) => {
     .catch(next);
 });
 
+router.delete('/:productId', customerIdValidator, (req, res, next) => {
+  const { customerId } = req.params;
+  const { productId } = req.params;
+
+  favoriteProductsService
+    .deleteFavoriteProduct(customerId, productId)
+    .then(() => {
+      res.json();
+    })
+    .catch(next);
+});
+
 module.exports = router;

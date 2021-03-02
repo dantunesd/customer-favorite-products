@@ -20,6 +20,13 @@ class FavoriteProductsService {
   async getFavoriteProducts(customerId) {
     return this.favoriteProductsRepository.getByCustomerId(customerId);
   }
+
+  async deleteFavoriteProduct(customerId, productId) {
+    return this.favoriteProductsRepository.deleteByCustomerIdAndProductId(
+      customerId,
+      productId,
+    );
+  }
 }
 
 module.exports = FavoriteProductsService;

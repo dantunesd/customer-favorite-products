@@ -6,6 +6,7 @@ const app = require('../../src/api/express-app');
 
 const customerToAdd = '603eaa775d7e15717d65430d';
 const customerToGet = '603ead3f711f9ad8a8686b8b';
+const customerToDelete = '603eafafb9935c2e72b98ce8';
 
 const validProduct = {
   productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
@@ -125,6 +126,54 @@ describe('Favorite Products Test Suite', () => {
         expect(result.body).toEqual({
           status: 404,
           title: 'Customer Not Found',
+          type: 'https://httpstatuses.com/404',
+        });
+      });
+    });
+  });
+
+  describe('DELETE /customers/:customerId:/favorite-products', () => {
+    describe('given I try to delete a favorite product of an existing customer', () => {
+      it('should return 200 status code', async () => {
+        const result = await supertest(app)
+          .delete(
+            `/customers/${customerToDelete}/favorite-products/${validProduct.productId}`,
+          )
+          .send();
+
+        expect(result.status).toEqual(200);
+      });
+    });
+
+    describe('given I try to delete a favorite product of an inexisting customer', () => {
+      it('should return 404 status code and the error', async () => {
+        const result = await supertest(app)
+          .delete(
+            `/customers/inexistenttt/favorite-products/${validProduct.productId}`,
+          )
+          .send();
+
+        expect(result.status).toEqual(404);
+        expect(result.body).toEqual({
+          status: 404,
+          title: 'Customer Not Found',
+          type: 'https://httpstatuses.com/404',
+        });
+      });
+    });
+
+    describe('given I try to delete a inexistent favorite product of an customer', () => {
+      it('should return 404 status code and the error', async () => {
+        const result = await supertest(app)
+          .delete(
+            `/customers/${customerToDelete}/favorite-products/inexistent-product`,
+          )
+          .send();
+
+        expect(result.status).toEqual(404);
+        expect(result.body).toEqual({
+          status: 404,
+          title: 'ProductId Not Found',
           type: 'https://httpstatuses.com/404',
         });
       });
