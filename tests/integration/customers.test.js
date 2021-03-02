@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./setup');
 
 const supertest = require('supertest');
 const app = require('../../src/api/express-app');
