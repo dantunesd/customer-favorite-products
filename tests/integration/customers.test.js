@@ -119,12 +119,12 @@ describe('Customers Test Suite', () => {
 
   describe('PUT /customers/:customerId', () => {
     describe('given I try to update an existent customer with a valid payload', () => {
-      it('should return 200 status code', async () => {
+      it('should return 204 status code', async () => {
         const result = await supertest(app)
           .put(`/customers/${customerToUpdate}`)
           .send(validCustomer());
 
-        expect(result.status).toEqual(200);
+        expect(result.status).toEqual(204);
       });
     });
 
@@ -192,12 +192,12 @@ describe('Customers Test Suite', () => {
 
   describe('DELETE /customers/:customerId', () => {
     describe('given I try to delete an existing customer', () => {
-      it('should return 200 status code', async () => {
+      it('should return 204 status code', async () => {
         const result = await supertest(app)
           .delete(`/customers/${customerToDelete}/`)
           .send();
 
-        expect(result.status).toEqual(200);
+        expect(result.status).toEqual(204);
       });
     });
 

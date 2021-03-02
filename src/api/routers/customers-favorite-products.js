@@ -17,6 +17,7 @@ router.post(
     favoriteProductsService
       .addFavoriteProduct(customerId, productId)
       .then(() => {
+        res.status(204);
         res.json();
       })
       .catch(next);
@@ -35,12 +36,12 @@ router.get('/', customerIdValidator, (req, res, next) => {
 });
 
 router.delete('/:productId', customerIdValidator, (req, res, next) => {
-  const { customerId } = req.params;
-  const { productId } = req.params;
+  const { customerId, productId } = req.params;
 
   favoriteProductsService
     .deleteFavoriteProduct(customerId, productId)
     .then(() => {
+      res.status(204);
       res.json();
     })
     .catch(next);

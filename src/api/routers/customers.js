@@ -29,6 +29,7 @@ router.put(
     customersService
       .updateCustomer(customerId, req.body)
       .then(() => {
+        res.status(204);
         res.json();
       })
       .catch(next);
@@ -52,6 +53,7 @@ router.delete('/:customerId', customerIdValidator, (req, res, next) => {
   customersService
     .deleteCustomer(customerId)
     .then(() => {
+      res.status(204);
       res.json();
     })
     .catch(next);

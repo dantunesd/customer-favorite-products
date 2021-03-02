@@ -27,22 +27,22 @@ describe('Favorite Products Test Suite', () => {
 
   describe('POST /customers/:customerId:/favorite-products', () => {
     describe('given I try to add a product to an existing customer', () => {
-      it('should return 200 status code', async () => {
+      it('should return 204 status code', async () => {
         const result = await supertest(app)
           .post(`/customers/${customerToAdd}/favorite-products`)
           .send(validProduct);
 
-        expect(result.status).toEqual(200);
+        expect(result.status).toEqual(204);
       });
     });
 
     describe('given I try to add a diferent product to customer', () => {
-      it('should return 200 status code', async () => {
+      it('should return 204 status code', async () => {
         const result = await supertest(app)
           .post(`/customers/${customerToAdd}/favorite-products`)
           .send(otherValidProduct);
 
-        expect(result.status).toEqual(200);
+        expect(result.status).toEqual(204);
       });
     });
 
@@ -134,14 +134,14 @@ describe('Favorite Products Test Suite', () => {
 
   describe('DELETE /customers/:customerId:/favorite-products', () => {
     describe('given I try to delete a favorite product of an existing customer', () => {
-      it('should return 200 status code', async () => {
+      it('should return 204 status code', async () => {
         const result = await supertest(app)
           .delete(
             `/customers/${customerToDelete}/favorite-products/${validProduct.productId}`,
           )
           .send();
 
-        expect(result.status).toEqual(200);
+        expect(result.status).toEqual(204);
       });
     });
 
