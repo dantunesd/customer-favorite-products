@@ -18,6 +18,16 @@ class FavoriteProductsRepository {
       notUpdatedHandler(result.result.nModified, 'product');
     });
   }
+
+  async getByCustomerId(customerId) {
+    const filter = { _id: ObjectID(customerId) };
+    const projection = { projection: { _id: 0, favoriteProducts: 1 } };
+
+    return this.collection.findOne(filter, projection).then((result) => {
+      notFoundHandler(result, 'Customer');
+      return result;
+    });
+  }
 }
 
 module.exports = FavoriteProductsRepository;

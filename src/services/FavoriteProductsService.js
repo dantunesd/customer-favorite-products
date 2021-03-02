@@ -9,11 +9,16 @@ class FavoriteProductsService {
 
     const product = {
       productId,
+      productData: 'data...',
       // complete data from product API
     };
 
     // saves after validation
     return this.favoriteProductsRepository.addByCustomerId(customerId, product);
+  }
+
+  async getFavoriteProducts(customerId) {
+    return this.favoriteProductsRepository.getByCustomerId(customerId);
   }
 }
 

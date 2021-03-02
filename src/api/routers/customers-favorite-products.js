@@ -17,10 +17,21 @@ router.post(
     favoriteProductsService
       .addFavoriteProduct(customerId, productId)
       .then(() => {
-        res.json({ customerId });
+        res.json();
       })
       .catch(next);
   },
 );
+
+router.get('/', customerIdValidator, (req, res, next) => {
+  const { customerId } = req.params;
+
+  favoriteProductsService
+    .getFavoriteProducts(customerId)
+    .then((favoriteProducts) => {
+      res.json(favoriteProducts);
+    })
+    .catch(next);
+});
 
 module.exports = router;
