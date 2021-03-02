@@ -48,8 +48,8 @@ router.delete('/:customerId', customerIdValidator, (req, res, next) => {
 
   customersService
     .deleteCustomer(customerId)
-    .then((customer) => {
-      res.json(customer);
+    .then(() => {
+      res.json();
     })
     .catch(next);
 });
