@@ -1,12 +1,12 @@
 const express = require('express');
 
 const customersService = require('../../factories/customersServiceFactory');
-const customerDataMiddleware = require('../middlewares/customerDataValidator');
-const customerIdMiddleware = require('../middlewares/customerIDValidator');
+const customerDataValidator = require('../middlewares/customerDataValidator');
+const customerIdValidator = require('../middlewares/customerIdValidator');
 
 const router = express.Router();
 
-router.post('/', customerDataMiddleware, async (req, res, next) => {
+router.post('/', customerDataValidator, (req, res, next) => {
   customersService
     .createCustomer(req.body)
     .then((customerId) => {
@@ -18,9 +18,9 @@ router.post('/', customerDataMiddleware, async (req, res, next) => {
 
 router.put(
   '/:customerId',
-  customerIdMiddleware,
-  customerDataMiddleware,
-  async (req, res, next) => {
+  customerIdValidator,
+  customerDataValidator,
+  (req, res, next) => {
     const { customerId } = req.params;
 
     customersService
@@ -32,7 +32,7 @@ router.put(
   },
 );
 
-router.get('/:customerId', customerIdMiddleware, async (req, res, next) => {
+router.get('/:customerId', customerIdValidator, (req, res, next) => {
   const { customerId } = req.params;
 
   customersService
@@ -43,7 +43,7 @@ router.get('/:customerId', customerIdMiddleware, async (req, res, next) => {
     .catch(next);
 });
 
-router.delete('/:customerId', customerIdMiddleware, async (req, res, next) => {
+router.delete('/:customerId', customerIdValidator, (req, res, next) => {
   const { customerId } = req.params;
 
   customersService
