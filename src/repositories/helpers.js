@@ -22,8 +22,15 @@ function notFoundHandler(exists, what) {
   }
 }
 
+function notUpdatedHandler(updated, what) {
+  if (!updated) {
+    throw new DuplicatedKeyError(what);
+  }
+}
+
 module.exports = {
   upsertErrorHandler,
   notFoundHandler,
   isDuplicateKeyError,
+  notUpdatedHandler,
 };
