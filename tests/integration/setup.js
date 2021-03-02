@@ -5,22 +5,48 @@ const dbName = 'customerFavoriteProductsDB';
 const collectionName = 'customersFavoriteProducts';
 const collection = mongoClient.db(dbName).collection(collectionName);
 
-collection.deleteMany({});
+module.exports = async () => {
+  await collection.deleteMany({});
 
-collection.insertOne({
-  _id: ObjectId('603ae34e540e915345f00f2e'),
-  email: 'existing@email.com',
-  name: 'existing name',
-});
+  // to customers test cases
+  await collection.insertOne({
+    _id: ObjectId('603ae34e540e915345f00f2e'),
+    email: 'existing@email.com',
+    name: 'existing name',
+  });
 
-collection.insertOne({
-  _id: ObjectId('603ae34e540e915345f00f2f'),
-  email: 'existing2@email.com',
-  name: 'existing2 name',
-});
+  await collection.insertOne({
+    _id: ObjectId('603ae34e540e915345f00f2f'),
+    email: 'toUpdate@email.com',
+    name: 'toUpdate',
+  });
 
-collection.insertOne({
-  _id: ObjectId('603ae34e540e915345f00f2c'),
-  email: 'existing3@email.com',
-  name: 'existing3 name',
-});
+  await collection.insertOne({
+    _id: ObjectId('603ae34e540e915345f00f2c'),
+    email: 'toDelete@email.com',
+    name: 'toDelete',
+  });
+
+  // to favorite products test cases
+  await collection.insertOne({
+    _id: ObjectId('603eaa775d7e15717d65430d'),
+    email: 'toAddProduct@email.com',
+    name: 'toAddProduct',
+  });
+
+  await collection.insertOne({
+    _id: ObjectId('603ead3f711f9ad8a8686b8b'),
+    email: 'toGetProduct@email.com',
+    name: 'toGetProduct',
+    favoriteProducts: [
+      {
+        productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+        productData: 'data...',
+      },
+      {
+        productId: '958ec015-cfcf-258d-c6df-1721de0ab6ea',
+        productData: 'data...',
+      },
+    ],
+  });
+};

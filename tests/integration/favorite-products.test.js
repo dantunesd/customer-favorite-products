@@ -1,72 +1,132 @@
 require('dotenv').config();
-require('./setup');
-
 const supertest = require('supertest');
+
+const setup = require('./setup');
 const app = require('../../src/api/express-app');
 
-const validCustomerId = '603ae34e540e915345f00f2e';
+const customerToAdd = '603eaa775d7e15717d65430d';
+const customerToGet = '603ead3f711f9ad8a8686b8b';
 
 const validProduct = {
   productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+};
+
+const otherValidProduct = {
+  productId: '958ec015-cfcf-258d-c6df-1721de0ab6ea',
 };
 
 const invalidProduct = {
   invalid: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
 };
 
-describe('POST /customers/:customerId:/favorite-products', () => {
-  describe('given I try to add a new product to an existing customer', () => {
-    it('should return 200 status code', async () => {
-      const result = await supertest(app)
-        .post(`/customers/${validCustomerId}/favorite-products`)
-        .send(validProduct);
-
-      expect(result.status).toEqual(200);
-    });
+describe('Favorite Products Test Suite', () => {
+  beforeAll(async () => {
+    await setup();
   });
 
-  describe('given I try to add a existing product to an existing customer', () => {
-    it('should return 422 status code and the error', async () => {
-      const result = await supertest(app)
-        .post(`/customers/${validCustomerId}/favorite-products`)
-        .send(validProduct);
+  describe('POST /customers/:customerId:/favorite-products', () => {
+    describe('given I try to add a product to an existing customer', () => {
+      it('should return 200 status code', async () => {
+        const result = await supertest(app)
+          .post(`/customers/${customerToAdd}/favorite-products`)
+          .send(validProduct);
 
-      expect(result.status).toEqual(422);
-      expect(result.body).toEqual({
-        status: 422,
-        title: 'This product is already registered',
-        type: 'https://httpstatuses.com/422',
+        expect(result.status).toEqual(200);
+      });
+    });
+
+    describe('given I try to add a diferent product to customer', () => {
+      it('should return 200 status code', async () => {
+        const result = await supertest(app)
+          .post(`/customers/${customerToAdd}/favorite-products`)
+          .send(otherValidProduct);
+
+        expect(result.status).toEqual(200);
+      });
+    });
+
+    describe('given I try to add the same product to customer', () => {
+      it('should return 422 status code and the error', async () => {
+        const result = await supertest(app)
+          .post(`/customers/${customerToAdd}/favorite-products`)
+          .send(validProduct);
+
+        expect(result.status).toEqual(422);
+        expect(result.body).toEqual({
+          status: 422,
+          title: 'This product is already registered',
+          type: 'https://httpstatuses.com/422',
+        });
+      });
+    });
+
+    describe('given I try to add a product with a invalid payload', () => {
+      it('should return 400 status code and the error', async () => {
+        const result = await supertest(app)
+          .post(`/customers/${customerToAdd}/favorite-products`)
+          .send(invalidProduct);
+
+        expect(result.status).toEqual(400);
+        expect(result.body).toEqual({
+          status: 400,
+          title:
+            "data should have required property 'productId', data should NOT have additional properties",
+          type: 'https://httpstatuses.com/400',
+        });
+      });
+    });
+
+    describe('given I try to add a product to an inexisting customer', () => {
+      it('should return 404 status code and the error', async () => {
+        const result = await supertest(app)
+          .post('/customers/inexistenttt/favorite-products')
+          .send(validProduct);
+
+        expect(result.status).toEqual(404);
+        expect(result.body).toEqual({
+          status: 404,
+          title: 'Customer Not Found',
+          type: 'https://httpstatuses.com/404',
+        });
       });
     });
   });
 
-  describe('given I try to add a new product with a invalid payload', () => {
-    it('should return 400 status code and the error', async () => {
-      const result = await supertest(app)
-        .post(`/customers/${validCustomerId}/favorite-products`)
-        .send(invalidProduct);
+  describe('GET /customers/:customerId:/favorite-products', () => {
+    describe('given I try to retrieve the favorite products of an existing customer', () => {
+      it('should return 200 status code and the content', async () => {
+        const result = await supertest(app)
+          .get(`/customers/${customerToGet}/favorite-products`)
+          .send();
 
-      expect(result.status).toEqual(400);
-      expect(result.body).toEqual({
-        status: 400,
-        title:
-          "data should have required property 'productId', data should NOT have additional properties",
-        type: 'https://httpstatuses.com/400',
+        expect(result.status).toEqual(200);
+        expect(result.body).toEqual({
+          favoriteProducts: [
+            {
+              productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+              productData: 'data...',
+            },
+            {
+              productId: '958ec015-cfcf-258d-c6df-1721de0ab6ea',
+              productData: 'data...',
+            },
+          ],
+        });
       });
     });
-  });
 
-  describe('given I try to add a new product to an inexisting customer', () => {
-    it('should return 404 status code and the error', async () => {
-      const result = await supertest(app)
-        .post('/customers/inexistenttt/favorite-products')
-        .send(validProduct);
+    describe('given I try to retrieve the favorite products of an inexisting customer', () => {
+      it('should return 404 status code and the error', async () => {
+        const result = await supertest(app)
+          .get('/customers/inexistenttt/favorite-products')
+          .send();
 
-      expect(result.status).toEqual(404);
-      expect(result.body).toEqual({
-        status: 404,
-        title: 'Customer Not Found',
-        type: 'https://httpstatuses.com/404',
+        expect(result.status).toEqual(404);
+        expect(result.body).toEqual({
+          status: 404,
+          title: 'Customer Not Found',
+          type: 'https://httpstatuses.com/404',
+        });
       });
     });
   });
