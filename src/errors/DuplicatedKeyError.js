@@ -1,6 +1,6 @@
 class DuplicatedKeyError extends Error {
   constructor(key) {
-    super(`This ${key} is already in use`);
+    super(`This ${key} is already registered`);
   }
 }
 

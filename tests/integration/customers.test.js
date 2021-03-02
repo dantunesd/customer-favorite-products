@@ -30,7 +30,7 @@ describe('POST /customers', () => {
     });
   });
 
-  describe('given I try to create a new customer with an email in use', () => {
+  describe('given I try to create a new customer with an email already registered', () => {
     it('should return 422 status code and the error', async () => {
       const result = await supertest(app)
         .post('/customers/')
@@ -39,7 +39,7 @@ describe('POST /customers', () => {
       expect(result.status).toEqual(422);
       expect(result.body).toEqual({
         status: 422,
-        title: 'This email is already in use',
+        title: 'This email is already registered',
         type: 'https://httpstatuses.com/422',
       });
     });
@@ -133,7 +133,7 @@ describe('PUT /customers/:customerId', () => {
     });
   });
 
-  describe('given I try to update an existent customer with an email in use', () => {
+  describe('given I try to update an existent customer with an email already registered', () => {
     it('should return 422 status code and the error', async () => {
       const result = await supertest(app)
         .put('/customers/603ae34e540e915345f00f2f')
@@ -142,7 +142,7 @@ describe('PUT /customers/:customerId', () => {
       expect(result.status).toEqual(422);
       expect(result.body).toEqual({
         status: 422,
-        title: 'This email is already in use',
+        title: 'This email is already registered',
         type: 'https://httpstatuses.com/422',
       });
     });
