@@ -1,10 +1,11 @@
 class FavoriteProductsService {
   constructor(favoriteProductsRepository) {
     this.favoriteProductsRepository = favoriteProductsRepository;
+    // this.productRepository = productRepository;
   }
 
   async addFavoriteProduct(customerId, productId) {
-    // validate product existence with luizalabs API
+    // const product = this.productRepository.getProductById(productId)
 
     const product = {
       productId,

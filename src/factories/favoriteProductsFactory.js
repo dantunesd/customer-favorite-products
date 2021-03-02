@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb');
-const environment = require('../infrastructure/environment');
+const { DB_URL } = require('../infrastructure/environment');
 const FavoriteProductsService = require('../services/FavoriteProductsService');
 const FavoriteProductsRepository = require('../repositories/FavoriteProductsRepository');
 
-const mongoClient = new MongoClient(environment.CUSTOMERS_DB_URL, {
+const mongoClient = new MongoClient(DB_URL, {
   useUnifiedTopology: true,
 });
 mongoClient.connect();
