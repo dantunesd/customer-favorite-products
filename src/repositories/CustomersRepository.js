@@ -18,7 +18,7 @@ class CustomersRepository {
 
   async getById(customerId) {
     const filter = { _id: ObjectID(customerId) };
-    const projection = { _id: true, name: true, email: true };
+    const projection = { projection: { name: 1, email: 1 } };
 
     return this.collection.findOne(filter, projection).then((result) => {
       notFoundHandler(result, 'Customer');
