@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./setup');
 
 const supertest = require('supertest');
 const app = require('../../src/api/express-app');
@@ -14,13 +15,28 @@ const invalidProduct = {
 };
 
 describe('POST /customers/:customerId:/favorite-products', () => {
-  describe('given I try to add a new product to an existing customer with a valid payload', () => {
+  describe('given I try to add a new product to an existing customer', () => {
     it('should return 200 status code', async () => {
       const result = await supertest(app)
         .post(`/customers/${validCustomerId}/favorite-products`)
         .send(validProduct);
 
       expect(result.status).toEqual(200);
+    });
+  });
+
+  describe('given I try to add a existing product to an existing customer', () => {
+    it('should return 422 status code and the error', async () => {
+      const result = await supertest(app)
+        .post(`/customers/${validCustomerId}/favorite-products`)
+        .send(validProduct);
+
+      expect(result.status).toEqual(422);
+      expect(result.body).toEqual({
+        status: 422,
+        title: 'This product is already registered',
+        type: 'https://httpstatuses.com/422',
+      });
     });
   });
 
