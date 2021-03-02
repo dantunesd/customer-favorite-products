@@ -1,27 +1,8 @@
-const { MongoError, ObjectID } = require('mongodb');
-const DuplicatedEmailError = require('../errors/DuplicatedEmailError');
-const CustomerNotFoundError = require('../errors/CustomerNotFoundError');
+const { ObjectID } = require('mongodb');
+const { upsertErrorHandler, notFoundHandler } = require('./helpers');
 
-const duplicateErrorMessage = 'duplicate key error collection';
 const dbName = 'customerFavoriteProductsDB';
 const collectionName = 'customersFavoriteProducts';
-
-function isDuplicateKeyError(e) {
-  return e instanceof MongoError && e.message.includes(duplicateErrorMessage);
-}
-
-function handleUpsertError(e) {
-  if (isDuplicateKeyError(e)) {
-    throw new DuplicatedEmailError();
-  }
-  throw e;
-}
-
-function handleCustomerExistence(exists) {
-  if (!exists) {
-    throw new CustomerNotFoundError();
-  }
-}
 
 class CustomersRepository {
   constructor(mongoClient) {
@@ -32,7 +13,7 @@ class CustomersRepository {
     return this.collection
       .insertOne(customerData)
       .then((result) => result.insertedId)
-      .catch(handleUpsertError);
+      .catch(upsertErrorHandler);
   }
 
   async getById(customerId) {
@@ -40,7 +21,7 @@ class CustomersRepository {
     const projection = { _id: true, name: true, email: true };
 
     return this.collection.findOne(filter, projection).then((result) => {
-      handleCustomerExistence(result);
+      notFoundHandler(result, 'Customer');
       return result;
     });
   }
@@ -49,7 +30,7 @@ class CustomersRepository {
     const filter = { _id: ObjectID(customerId) };
 
     return this.collection.deleteOne(filter).then((result) => {
-      handleCustomerExistence(result.result.n);
+      notFoundHandler(result.result.n, 'Customer');
     });
   }
 
@@ -60,9 +41,9 @@ class CustomersRepository {
     return this.collection
       .updateOne(filter, fields)
       .then((result) => {
-        handleCustomerExistence(result.result.n);
+        notFoundHandler(result.result.n, 'Customer');
       })
-      .catch(handleUpsertError);
+      .catch(upsertErrorHandler);
   }
 }
 
