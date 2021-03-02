@@ -1,12 +1,6 @@
-const { MongoClient } = require('mongodb');
-const { DB_URL } = require('../infrastructure/environment');
+const mongoClient = require('./mongoClientFactory');
 const FavoriteProductsService = require('../services/FavoriteProductsService');
 const FavoriteProductsRepository = require('../repositories/FavoriteProductsRepository');
-
-const mongoClient = new MongoClient(DB_URL, {
-  useUnifiedTopology: true,
-});
-mongoClient.connect();
 
 const favoriteProductsRepository = new FavoriteProductsRepository(mongoClient);
 const favoriteProductsService = new FavoriteProductsService(
