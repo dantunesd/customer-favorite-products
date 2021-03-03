@@ -9,7 +9,8 @@ function errorLogger(error, req, res, next) {
       stack_trace: error.stack,
     },
   });
-  return next(error);
+
+  next(error);
 }
 
 module.exports = errorLogger;

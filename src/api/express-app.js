@@ -7,9 +7,9 @@ const routers = require('./routers');
 const app = express();
 
 app.use(express.json());
-app.use(requestLogger);
 app.use('/', routers);
 app.use(errorLogger);
 app.use(errorHandler);
+app.use(requestLogger);
 
 module.exports = app;

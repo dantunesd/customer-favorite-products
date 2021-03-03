@@ -30,7 +30,9 @@ function errorHandler(err, req, res, next) {
       break;
   }
 
-  return apiProblem.send(res);
+  apiProblem.send(res);
+
+  next();
 }
 
 module.exports = errorHandler;

@@ -13,9 +13,9 @@ router.post('/', customerDataValidator, (req, res, next) => {
   customersService
     .createCustomer(req.body)
     .then((customerId) => {
-      res.status(201);
-      res.json({ customerId });
+      res.status(201).json({ customerId });
     })
+    .then(next)
     .catch(next);
 });
 
@@ -29,9 +29,9 @@ router.put(
     customersService
       .updateCustomer(customerId, req.body)
       .then(() => {
-        res.status(204);
-        res.json();
+        res.status(204).json();
       })
+      .then(next)
       .catch(next);
   },
 );
@@ -44,6 +44,7 @@ router.get('/:customerId', customerIdValidator, (req, res, next) => {
     .then((customer) => {
       res.json(customer);
     })
+    .then(next)
     .catch(next);
 });
 
@@ -53,9 +54,9 @@ router.delete('/:customerId', customerIdValidator, (req, res, next) => {
   customersService
     .deleteCustomer(customerId)
     .then(() => {
-      res.status(204);
-      res.json();
+      res.status(204).json();
     })
+    .then(next)
     .catch(next);
 });
 
