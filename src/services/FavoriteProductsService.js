@@ -1,20 +1,21 @@
 class FavoriteProductsService {
-  constructor(favoriteProductsRepository) {
+  constructor(favoriteProductsRepository, productsRepository) {
     this.favoriteProductsRepository = favoriteProductsRepository;
-    // this.productRepository = productRepository;
+    this.productsRepository = productsRepository;
   }
 
   async addFavoriteProduct(customerId, productId) {
-    // const product = this.productRepository.getProductById(productId)
+    const product = await this.productsRepository.getById(productId);
 
-    const product = {
-      productId,
-      productData: 'data...',
-      // complete data from product API
+    const productWithoutBrand = {
+      ...product,
     };
+    delete productWithoutBrand.brand;
 
-    // saves after validation
-    return this.favoriteProductsRepository.addByCustomerId(customerId, product);
+    return this.favoriteProductsRepository.addByCustomerId(
+      customerId,
+      productWithoutBrand,
+    );
   }
 
   async getFavoriteProducts(customerId) {
