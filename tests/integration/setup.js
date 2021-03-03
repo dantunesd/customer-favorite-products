@@ -40,7 +40,7 @@ module.exports = async () => {
     name: 'toGetProduct',
     favoriteProducts: [
       {
-        productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+        productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
         productData: 'data...',
       },
       {
@@ -56,7 +56,7 @@ module.exports = async () => {
     name: 'toDeleteProduct',
     favoriteProducts: [
       {
-        productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+        productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
         productData: 'data...',
       },
       {

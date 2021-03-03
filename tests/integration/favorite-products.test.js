@@ -9,7 +9,7 @@ const customerToGet = '603ead3f711f9ad8a8686b8b';
 const customerToDelete = '603eafafb9935c2e72b98ce8';
 
 const validProduct = {
-  productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+  productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
 };
 
 const otherValidProduct = {
@@ -17,7 +17,7 @@ const otherValidProduct = {
 };
 
 const invalidProduct = {
-  invalid: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+  invalid: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
 };
 
 describe('Favorite Products Test Suite', () => {
@@ -104,7 +104,7 @@ describe('Favorite Products Test Suite', () => {
         expect(result.body).toEqual({
           favoriteProducts: [
             {
-              productId: 'bf0f365-fbdd-4e21-9786-da459d78dd1f',
+              productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
               productData: 'data...',
             },
             {
