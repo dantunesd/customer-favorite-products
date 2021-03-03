@@ -1,5 +1,5 @@
 const { ObjectID } = require('mongodb');
-const { notUpdatedHandler, notFoundHandler } = require('./helpers');
+const { productDuplicatedHandler, notFoundHandler } = require('./helpers');
 
 const dbName = 'customerFavoriteProductsDB';
 const collectionName = 'customersFavoriteProducts';
@@ -13,9 +13,10 @@ class FavoriteProductsRepository {
     const filter = { _id: ObjectID(customerId) };
     const addToSet = { $addToSet: { favoriteProducts: product } };
 
-    return this.collection.updateOne(filter, addToSet).then((result) => {
-      notFoundHandler(result.result.n, 'Customer');
-      notUpdatedHandler(result.result.nModified, 'product');
+    return this.collection.updateOne(filter, addToSet).then((res) => {
+      const { result } = res;
+      notFoundHandler(result.n, 'Customer');
+      productDuplicatedHandler(result.n, result.nModified);
     });
   }
 

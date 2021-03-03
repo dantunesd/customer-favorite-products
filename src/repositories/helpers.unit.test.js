@@ -2,38 +2,10 @@ const { MongoError } = require('mongodb');
 const DuplicatedKeyError = require('../errors/DuplicatedKeyError');
 const NotFoundError = require('../errors/NotFoundError');
 const {
-  isDuplicateKeyError,
   upsertErrorHandler,
   notFoundHandler,
+  productDuplicatedHandler,
 } = require('./helpers');
-
-describe('isDuplicateKeyError test cases', () => {
-  describe('given I receive a generic error', () => {
-    it('should return false', async () => {
-      expect(isDuplicateKeyError(new Error('some generic error'))).toBeFalsy();
-    });
-  });
-
-  describe('given I receive a mongodbError, but it is not a duplicate error', () => {
-    it('should return false', async () => {
-      expect(
-        isDuplicateKeyError(new MongoError('another dberror error')),
-      ).toBeFalsy();
-    });
-  });
-
-  describe('given I receive a mongodbError, and it is a duplicate error', () => {
-    it('should return true', async () => {
-      expect(
-        isDuplicateKeyError(
-          new MongoError(
-            'E11000 duplicate key error collection: customerFavoriteProductsDB.customersFavoriteProducts index: email_1 dup key: { email: "email@email.com" }',
-          ),
-        ),
-      ).toBeTruthy();
-    });
-  });
-});
 
 describe('upsertErrorHandler test cases', () => {
   describe('given I receive a generic error', () => {
@@ -59,27 +31,47 @@ describe('upsertErrorHandler test cases', () => {
       const error = new MongoError(
         'E11000 duplicate key error collection: customerFavoriteProductsDB.customersFavoriteProducts index: email_1 dup key: { email: "email@email.com" }',
       );
-      const throwed = new DuplicatedKeyError('email');
       expect(() => {
         upsertErrorHandler(error);
-      }).toThrow(throwed);
+      }).toThrow(new DuplicatedKeyError('email'));
     });
   });
 });
 
 describe('notFoundHandler test cases', () => {
-  describe('given I receive a empty data to validate', () => {
+  describe('given I receive a empty value', () => {
     it('should throw the NotFoundError', async () => {
-      const error = new NotFoundError('myField');
       expect(() => {
-        notFoundHandler(null, 'myField');
-      }).toThrow(error);
+        notFoundHandler(null, 'Customer');
+      }).toThrow(new NotFoundError('Customer'));
     });
   });
 
-  describe('given I receive a filled data to validate', () => {
+  describe('given I receive a non empty value', () => {
     it('should not throw the NotFoundError', async () => {
-      expect(notFoundHandler({ my: 'data' }, 'myField')).toBeUndefined();
+      expect(notFoundHandler({ my: 'data' }, 'Customer')).toBeUndefined();
+    });
+  });
+});
+
+describe('productDuplicatedHandler test cases', () => {
+  describe('given I receive a document that matched and item was added', () => {
+    it('should not throw the NotFoundError', async () => {
+      expect(productDuplicatedHandler(1, 1)).toBeUndefined();
+    });
+  });
+
+  describe('given I receive a document that not matched', () => {
+    it('should not throw the NotFoundError', async () => {
+      expect(productDuplicatedHandler(0, 1)).toBeUndefined();
+    });
+  });
+
+  describe('given I receive a document that matched and item was not added', () => {
+    it('should throw DuplicatedKeyError', async () => {
+      expect(() => {
+        productDuplicatedHandler(1, 0);
+      }).toThrow(new DuplicatedKeyError('product'));
     });
   });
 });
