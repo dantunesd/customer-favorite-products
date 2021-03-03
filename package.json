@@ -9,7 +9,7 @@
   },
   "main": "src/index.js",
   "scripts": {
-    "test": "jest unit.test.*.js",
+    "test": "jest unit.test.*.js --coverage",
     "test:integration": "jest tests/integration/ --forceExit"
   },
   "dependencies": {
