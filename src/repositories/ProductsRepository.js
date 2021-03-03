@@ -14,7 +14,7 @@ class ProductsRepository {
       .then((response) => response.data)
       .catch((e) => {
         if (e.response.status === 404) {
-          throw new ValidationError(e.response.data.error_message);
+          throw new ValidationError('Product Not Found');
         }
         throw e;
       });

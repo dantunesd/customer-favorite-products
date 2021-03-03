@@ -91,7 +91,7 @@ describe('Favorite Products Test Suite', () => {
         expect(result.status).toEqual(400);
         expect(result.body).toEqual({
           type: 'https://httpstatuses.com/400',
-          title: 'Product inexistent not found',
+          title: 'Product Not Found',
           status: 400,
         });
       });
