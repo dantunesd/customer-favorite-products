@@ -20,6 +20,10 @@ const invalidProduct = {
   invalid: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
 };
 
+const inexistentProduct = {
+  productId: 'inexistent',
+};
+
 describe('Favorite Products Test Suite', () => {
   beforeAll(async () => {
     await setup();
@@ -73,6 +77,22 @@ describe('Favorite Products Test Suite', () => {
           title:
             "data should have required property 'productId', data should NOT have additional properties",
           type: 'https://httpstatuses.com/400',
+        });
+      });
+    });
+
+    describe('given I try to add an inexistent product to customer', () => {
+      it('should return 422 status code and the error', async () => {
+        const result = await supertest(app)
+          .post(`/customers/${customerToAdd}/favorite-products`)
+          .send(inexistentProduct);
+
+        // should be 422
+        expect(result.status).toEqual(400);
+        expect(result.body).toEqual({
+          type: 'https://httpstatuses.com/400',
+          title: 'Product inexistent not found',
+          status: 400,
         });
       });
     });
