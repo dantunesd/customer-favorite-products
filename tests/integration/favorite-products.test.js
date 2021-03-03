@@ -87,12 +87,11 @@ describe('Favorite Products Test Suite', () => {
           .post(`/customers/${customerToAdd}/favorite-products`)
           .send(inexistentProduct);
 
-        // should be 422
-        expect(result.status).toEqual(400);
+        expect(result.status).toEqual(422);
         expect(result.body).toEqual({
-          type: 'https://httpstatuses.com/400',
+          type: 'https://httpstatuses.com/422',
           title: 'Product Not Found',
-          status: 400,
+          status: 422,
         });
       });
     });

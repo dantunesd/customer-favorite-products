@@ -1,4 +1,4 @@
-const ValidationError = require('../errors/ValidationError');
+const ProductNotFoundError = require('../errors/ProductNotFoundError');
 const FavoriteProductsService = require('./FavoriteProductsService');
 
 const favoriteProductsRepositoryMock = {
@@ -45,13 +45,13 @@ const getResult = {
 describe('addFavoriteProduct test case', () => {
   describe('given I receive a product that not exists', () => {
     productsRepositoryMock.getById.mockRejectedValueOnce(
-      new ValidationError('Product Not Found'),
+      new ProductNotFoundError(),
     );
 
-    it('should throw a ValidationError', async () => {
+    it('should throw a ProductNotFoundError', async () => {
       await expect(
         favoriteProductsService.addFavoriteProduct(1, 2),
-      ).rejects.toEqual(new ValidationError('Product Not Found'));
+      ).rejects.toEqual(new ProductNotFoundError());
     });
 
     it('should call getById with params', async () => {
