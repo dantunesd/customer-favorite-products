@@ -9,6 +9,7 @@
   },
   "main": "src/index.js",
   "scripts": {
+    "start": "node src/index.js",
     "test": "jest unit.test.*.js --coverage",
     "test:integration": "jest tests/integration/ --forceExit"
   },
