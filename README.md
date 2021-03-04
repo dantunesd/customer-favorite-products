@@ -82,9 +82,7 @@ Note: For development purposes, [generate your token](https://jwt.io/) using the
 
 ### Request
 
-```
-POST /customers
-```
+`POST /customers`
 
 ```bash
 curl --request POST 'http://localhost:8080/customers' \
