@@ -100,7 +100,6 @@ curl --request POST 'http://localhost:8080/customers' \
 
 ```json
 Status: 201 Created
-application/json; charset=utf-8
 
 {
   "customerId": "6040d34e5d2ed12af06bcb96"
@@ -124,7 +123,6 @@ curl --request GET 'http://localhost:8080/customers/{customerId}' \
 
 ```json
 Status: 200 OK
-application/json; charset=utf-8
 
 {
   "_id": "6040d34e5d2ed12af06bcb96",
@@ -155,7 +153,6 @@ curl --request PUT 'http://localhost:8080/customers/{customerId}' \
 
 ```
 Status: 204 No Content
-application/json; charset=utf-8
 ```
 
 ## Delete a customer
@@ -175,7 +172,6 @@ curl --request DELETE 'http://localhost:8080/customers/{customerId}' \
 
 ```
 Status: 204 No Content
-application/json; charset=utf-8
 ```
 
 ## Add a product to a customer
@@ -199,7 +195,6 @@ curl --request POST 'http://localhost:8080/customers/{customerId}/favorite-produ
 
 ```
 Status: 204 No Content
-application/json; charset=utf-8
 ```
 
 ## Get the product list of a customer
@@ -219,7 +214,6 @@ curl --request GET 'http://localhost:8080/customers/{customerId}/favorite-produc
 
 ```json
 Status: 200 OK
-application/json; charset=utf-8
 
 {
   "favoriteProducts": [
@@ -250,5 +244,4 @@ curl --request DELETE 'http://localhost:8080/customers/{customerId}/favorite-pro
 
 ```
 Status: 204 No Content
-application/json; charset=utf-8
 ```
