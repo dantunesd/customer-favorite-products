@@ -5,6 +5,9 @@ const {
   LOG_LEVEL,
   DB_URL,
   PRODUCTS_API_URL,
+  JWT_SECRET,
+  JWT_AUDIENCE,
+  JWT_ISSUER,
 } = process.env;
 
 module.exports = {
@@ -14,4 +17,7 @@ module.exports = {
   LOG_LEVEL,
   DB_URL,
   PRODUCTS_API_URL,
+  JWT_SECRET,
+  JWT_AUDIENCE,
+  JWT_ISSUER,
 };

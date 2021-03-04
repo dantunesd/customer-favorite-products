@@ -1,4 +1,5 @@
 const ApiProblem = require('api-problem');
+const { UnauthorizedError } = require('express-jwt');
 const DuplicatedKeyError = require('../../errors/DuplicatedKeyError');
 const NotFoundError = require('../../errors/NotFoundError');
 const ValidationError = require('../../errors/ValidationError');
@@ -25,6 +26,10 @@ function errorHandler(err, req, res, next) {
 
     case err instanceof NotFoundError:
       apiProblem = new ApiProblem(404, err.message);
+      break;
+
+    case err instanceof UnauthorizedError:
+      apiProblem = new ApiProblem(401, err.message);
       break;
 
     default:
