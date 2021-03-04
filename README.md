@@ -30,11 +30,11 @@ Create a `.env` file and change to your needs:
 cp .env.example .env
 ```
 
-_Optional_:
+Optional:
 
-_set `PRODUCTS_API_URL='http://challenge-api.luizalabs.com/api/product/%/'` entry at `.env` to send requests to LuizaLabs's products API._
+set `PRODUCTS_API_URL='http://challenge-api.luizalabs.com/api/product/%/'` entry at `.env` to send requests to LuizaLabs's products API.
 
-_set `NODE_ENV=testing` entry at `.env` to silence the logs while running tests._
+set `NODE_ENV=testing` entry at `.env` to silence the logs while running tests.
 
 Start DB and MockServer:
 
@@ -51,6 +51,8 @@ Run the following command:
 ```bash
 node src/index.js
 ```
+
+A Postman collection can be [found here](https://github.com/dantunesd/customer-favorite-products/blob/main/docs/customer-favorite-products.postman_collection.json) to help you with the requests.
 
 ---
 
