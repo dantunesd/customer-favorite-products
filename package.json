@@ -15,6 +15,7 @@
   "dependencies": {
     "@elastic/ecs-winston-format": "^1.0.0",
     "ajv": "^7.1.1",
+    "ajv-formats": "^1.5.1",
     "api-problem": "^7.0.0",
     "axios": "^0.21.1",
     "dotenv": "^8.2.0",

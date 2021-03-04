@@ -16,6 +16,7 @@
   "properties": {
     "email": {
       "type": "string",
+      "format": "email",
       "description": "the customer email",
       "examples": [
         "email@email.com"
@@ -24,6 +25,8 @@
     "name": {
       "type": "string",
       "description": "The customer name",
+      "minLength": 3,
+      "maxLength": 100,
         "examples": [
           "Name Lastname"
       ]

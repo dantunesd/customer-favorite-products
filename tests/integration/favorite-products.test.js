@@ -24,7 +24,7 @@ const invalidProduct = {
 };
 
 const inexistentProduct = {
-  productId: 'inexistent',
+  productId: '1bf0f365-fbdd-4e21-1234-da459d78dd1f',
 };
 
 describe('Favorite Products Test Suite', () => {
