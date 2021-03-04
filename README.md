@@ -71,3 +71,33 @@ npm run test:integration
 P.S: run `Installation` step before running integration tests.
 
 ---
+
+# REST API
+
+Available resources:
+
+## Create a customer
+
+### Request
+
+```
+POST /customers
+```
+
+```bash
+curl --location --request POST 'http://localhost:8080/customers/' \
+--header 'Authorization: Bearer your-token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "email@email.com",
+  "name": "name lastnaame"
+}'
+```
+
+### Response
+
+```json
+{
+  "customerId": "6040d34e5d2ed12af06bcb96"
+}
+```
