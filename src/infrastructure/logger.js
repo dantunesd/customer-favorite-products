@@ -3,7 +3,7 @@ const ecsFormat = require('@elastic/ecs-winston-format');
 const enviroment = require('./environment');
 
 const logger = winston.createLogger({
-  silent: enviroment.NODE_ENV !== 'testing',
+  silent: enviroment.NODE_ENV === 'test',
   level: enviroment.LOG_LEVEL,
   defaultMeta: { application: enviroment.APP_NAME },
   format: ecsFormat({ convertReqRes: true }),
