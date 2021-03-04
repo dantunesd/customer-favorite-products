@@ -27,8 +27,10 @@ const inexistentProduct = {
   productId: '1bf0f365-fbdd-4e21-1234-da459d78dd1f',
 };
 
-beforeAll(async () => {
+// eslint-disable-next-line jest/no-done-callback
+beforeAll(async (done) => {
   await setup();
+  done();
 });
 
 describe('Favorite Products Test Suite', () => {

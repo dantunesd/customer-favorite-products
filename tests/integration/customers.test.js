@@ -26,9 +26,12 @@ const invalidCustomer = {
   name: 'name',
 };
 
-beforeAll(async () => {
+// eslint-disable-next-line jest/no-done-callback
+beforeAll(async (done) => {
   await setup();
+  done();
 });
+
 describe('Customers Test Suite', () => {
   describe('POST /customers', () => {
     describe('given I try to create a new customer with a valid payload', () => {
