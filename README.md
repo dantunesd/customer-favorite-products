@@ -72,7 +72,7 @@ P.S: run `Installation` step before running integration tests.
 
 ---
 
-# REST API
+# Rest Api
 
 Available resources:
 
@@ -85,8 +85,61 @@ POST /customers
 ```
 
 ```bash
-curl --location --request POST 'http://localhost:8080/customers/' \
+curl --request POST 'http://localhost:8080/customers' \
 --header 'Authorization: Bearer your-token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "email": "email@email.com",
+  "name": "name lastnaame"
+}'
+```
+
+200 Ok
+
+### Response
+
+```json
+{
+  "customerId": "6040d34e5d2ed12af06bcb96"
+}
+```
+
+## Get a customer
+
+### Request
+
+```
+GET /customers/{customerId}
+```
+
+```bash
+curl --request GET 'http://localhost:8080/customers/{customerId}' \
+--header 'Authorization: Bearer your-token'
+```
+
+### Response
+
+200 Ok
+
+```json
+{
+  "_id": "6040d34e5d2ed12af06bcb96",
+  "email": "email@email.com",
+  "name": "name lastnaame"
+}
+```
+
+## Update a customer
+
+### Request
+
+```
+PUT /customers/{customerId}
+```
+
+```bash
+curl --location -g --request PUT 'http://localhost:8080/customers/{customerId}' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSJ9.g7Rm3Ju3bdyMf-GGwCBohaRSisEUSy2b9vmSFxxqZZc' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "email": "email@email.com",
@@ -96,8 +149,112 @@ curl --location --request POST 'http://localhost:8080/customers/' \
 
 ### Response
 
+204 No content
+
+## Delete a customer
+
+### Request
+
+```
+DELETE /customers/{customerId}
+
+```
+
+```bash
+curl --request DELETE 'http://localhost:8080/customers/{customerId}' \
+--header 'Authorization: Bearer your-token'
+```
+
+### Response
+
+204 No content
+
+## X
+
+### Request
+
+```
+PATH
+```
+
+```bash
+COMMAND
+```
+
+### Response
+
 ```json
-{
-  "customerId": "6040d34e5d2ed12af06bcb96"
-}
+BODY
+```
+
+## X
+
+### Request
+
+```
+PATH
+```
+
+```bash
+COMMAND
+```
+
+### Response
+
+```json
+BODY
+```
+
+## X
+
+### Request
+
+```
+PATH
+```
+
+```bash
+COMMAND
+```
+
+### Response
+
+```json
+BODY
+```
+
+## X
+
+### Request
+
+```
+PATH
+```
+
+```bash
+COMMAND
+```
+
+### Response
+
+```json
+BODY
+```
+
+## X
+
+### Request
+
+```
+PATH
+```
+
+```bash
+COMMAND
+```
+
+### Response
+
+```json
+BODY
 ```
