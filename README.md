@@ -6,11 +6,11 @@ An API to manages customers and their favorite products
 
 # Pre Requirements
 
-- `Docker ^19.03`
+- `Docker 19.03`
 
-- `Docker Compose ^1.25`
+- `Docker Compose 1.25`
 
-- `NPM + Nodejs ^14.16 (optional)`
+- `NPM + Nodejs 14.16`
 
 P.S.: if you have nvm installed in your machine, just run `nvm install` command to get the correct `NodeJs` version.
 
@@ -18,22 +18,10 @@ P.S.: if you have nvm installed in your machine, just run `nvm install` command 
 
 # Installation
 
-Run the following command to install npm dependencies:
-
-```bash
-docker-compose -f docker-compose-npm-install.yaml up
-```
-
-Or if you have `npm` installed:
+Install dependencies
 
 ```bash
 npm install
-```
-
-Start the api's service dependencies:
-
-```bash
-docker-compose -f docker-compose-services.yaml up
 ```
 
 Create a `.env` file and change to your needs:
@@ -42,23 +30,23 @@ Create a `.env` file and change to your needs:
 cp .env.example .env
 ```
 
-Optional:
+_Optional_:
 
-set `PRODUCTS_API_URL='http://challenge-api.luizalabs.com/api/product/%/'` entry at `.env` to send requests to LuizaLabs's products API.
+_set `PRODUCTS_API_URL='http://challenge-api.luizalabs.com/api/product/%/'` entry at `.env` to send requests to LuizaLabs's products API._
 
-set `NODE_ENV=testing` entry at `.env` to silence the logs while running tests.
+_set `NODE_ENV=testing` entry at `.env` to silence the logs while running tests._
+
+Start DB and MockServer:
+
+```bash
+docker-compose up -d
+```
 
 ---
 
 # Start API locally
 
 Run the following command:
-
-```bash
-docker-compose -f docker-compose-start-api.yaml up
-```
-
-Or if you have `NodeJS` installed:
 
 ```bash
 node src/index.js
