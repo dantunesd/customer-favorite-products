@@ -4,7 +4,6 @@ const BusinessError = require('../../errors/BusinessError');
 const NotFoundError = require('../../errors/NotFoundError');
 const ValidationError = require('../../errors/ValidationError');
 
-// eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
   let apiProblem;
 

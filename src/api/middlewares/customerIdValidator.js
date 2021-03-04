@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const ValidationError = require('../../errors/ValidationError');
 
-function customerIDValidator(req, res, next) {
+function customerIdValidator(req, res, next) {
   const { customerId } = req.params;
 
   if (!ObjectId.isValid(customerId)) {
@@ -12,4 +12,4 @@ function customerIDValidator(req, res, next) {
   return next();
 }
 
-module.exports = customerIDValidator;
+module.exports = customerIdValidator;
