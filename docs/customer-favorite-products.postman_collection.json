@@ -251,7 +251,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/customers/604022e077f6f6e0454cceb7/favorite-products/958ec015-cfcf-258d-c6df-1721de0ab6ea",
+					"raw": "http://localhost:8080/customers/{customerId}/favorite-products/{productId}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -259,9 +259,9 @@
 					"port": "8080",
 					"path": [
 						"customers",
-						"604022e077f6f6e0454cceb7",
+						"{customerId}",
 						"favorite-products",
-						"958ec015-cfcf-258d-c6df-1721de0ab6ea"
+						"{productId}"
 					]
 				}
 			},
