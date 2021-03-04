@@ -4,6 +4,9 @@ const supertest = require('supertest');
 const setup = require('./setup');
 const app = require('../../src/api/express-app');
 
+// eslint-disable-next-line prettier/prettier
+const jtwToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSJ9.g7Rm3Ju3bdyMf-GGwCBohaRSisEUSy2b9vmSFxxqZZc';
+
 const customerToAdd = '603eaa775d7e15717d65430d';
 const customerToGet = '603ead3f711f9ad8a8686b8b';
 const customerToDelete = '603eafafb9935c2e72b98ce8';
@@ -34,7 +37,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 204 status code', async () => {
         const result = await supertest(app)
           .post(`/customers/${customerToAdd}/favorite-products`)
-          .send(validProduct);
+          .send(validProduct)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(204);
       });
@@ -44,7 +48,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 204 status code', async () => {
         const result = await supertest(app)
           .post(`/customers/${customerToAdd}/favorite-products`)
-          .send(otherValidProduct);
+          .send(otherValidProduct)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(204);
       });
@@ -54,7 +59,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 422 status code and the error', async () => {
         const result = await supertest(app)
           .post(`/customers/${customerToAdd}/favorite-products`)
-          .send(validProduct);
+          .send(validProduct)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(422);
         expect(result.body).toEqual({
@@ -69,7 +75,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 400 status code and the error', async () => {
         const result = await supertest(app)
           .post(`/customers/${customerToAdd}/favorite-products`)
-          .send(invalidProduct);
+          .send(invalidProduct)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(400);
         expect(result.body).toEqual({
@@ -85,7 +92,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 422 status code and the error', async () => {
         const result = await supertest(app)
           .post(`/customers/${customerToAdd}/favorite-products`)
-          .send(inexistentProduct);
+          .send(inexistentProduct)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(422);
         expect(result.body).toEqual({
@@ -100,7 +108,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 404 status code and the error', async () => {
         const result = await supertest(app)
           .post('/customers/inexistenttt/favorite-products')
-          .send(validProduct);
+          .send(validProduct)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(404);
         expect(result.body).toEqual({
@@ -117,7 +126,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 200 status code and the content', async () => {
         const result = await supertest(app)
           .get(`/customers/${customerToGet}/favorite-products`)
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(200);
         expect(result.body).toEqual({
@@ -145,7 +155,8 @@ describe('Favorite Products Test Suite', () => {
       it('should return 404 status code and the error', async () => {
         const result = await supertest(app)
           .get('/customers/inexistenttt/favorite-products')
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(404);
         expect(result.body).toEqual({
@@ -164,7 +175,8 @@ describe('Favorite Products Test Suite', () => {
           .delete(
             `/customers/${customerToDelete}/favorite-products/${validProduct.productId}`,
           )
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(204);
       });
@@ -176,7 +188,8 @@ describe('Favorite Products Test Suite', () => {
           .delete(
             `/customers/inexistenttt/favorite-products/${validProduct.productId}`,
           )
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(404);
         expect(result.body).toEqual({
@@ -193,7 +206,8 @@ describe('Favorite Products Test Suite', () => {
           .delete(
             `/customers/${customerToDelete}/favorite-products/inexistent-product`,
           )
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(404);
         expect(result.body).toEqual({

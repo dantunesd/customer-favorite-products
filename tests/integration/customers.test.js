@@ -4,6 +4,9 @@ const supertest = require('supertest');
 const setup = require('./setup');
 const app = require('../../src/api/express-app');
 
+// eslint-disable-next-line prettier/prettier
+const jtwToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSJ9.g7Rm3Ju3bdyMf-GGwCBohaRSisEUSy2b9vmSFxxqZZc';
+
 const validCustomer = () => ({
   email: `${new Date().getTime()}@email.com`,
   name: 'name lastname',
@@ -33,7 +36,8 @@ describe('Customers Test Suite', () => {
       it('should return 201 status code and an ID in body', async () => {
         const result = await supertest(app)
           .post('/customers/')
-          .send(validCustomer());
+          .send(validCustomer())
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(201);
         expect(result.body).toHaveProperty('customerId');
@@ -44,7 +48,8 @@ describe('Customers Test Suite', () => {
       it('should return 422 status code and the error', async () => {
         const result = await supertest(app)
           .post('/customers/')
-          .send(existingCustomer);
+          .send(existingCustomer)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(422);
         expect(result.body).toEqual({
@@ -59,7 +64,8 @@ describe('Customers Test Suite', () => {
       it('should return 400 status code and the error', async () => {
         const result = await supertest(app)
           .post('/customers/')
-          .send(invalidCustomer);
+          .send(invalidCustomer)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(400);
         expect(result.body).toEqual({
@@ -77,7 +83,8 @@ describe('Customers Test Suite', () => {
       it('should return 200 status code and the customer content', async () => {
         const result = await supertest(app)
           .get(`/customers/${customerToGet}/`)
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(200);
         expect(result.body).toEqual({
@@ -92,7 +99,8 @@ describe('Customers Test Suite', () => {
       it('should return 404 status code and the error', async () => {
         const result = await supertest(app)
           .get('/customers/inexistenttt/')
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(404);
         expect(result.body).toEqual({
@@ -105,7 +113,10 @@ describe('Customers Test Suite', () => {
 
     describe('given I try to retrieve a customer with an invalid id', () => {
       it('should return 400 status code and the error', async () => {
-        const result = await supertest(app).get('/customers/invalid/').send();
+        const result = await supertest(app)
+          .get('/customers/invalid/')
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(400);
         expect(result.body).toEqual({
@@ -122,7 +133,8 @@ describe('Customers Test Suite', () => {
       it('should return 204 status code', async () => {
         const result = await supertest(app)
           .put(`/customers/${customerToUpdate}`)
-          .send(validCustomer());
+          .send(validCustomer())
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(204);
       });
@@ -132,7 +144,8 @@ describe('Customers Test Suite', () => {
       it('should return 404 status code and the error', async () => {
         const result = await supertest(app)
           .put('/customers/inexistenttt')
-          .send(validCustomer());
+          .send(validCustomer())
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(404);
         expect(result.body).toEqual({
@@ -147,7 +160,8 @@ describe('Customers Test Suite', () => {
       it('should return 422 status code and the error', async () => {
         const result = await supertest(app)
           .put(`/customers/${customerToUpdate}`)
-          .send(existingCustomer);
+          .send(existingCustomer)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(422);
         expect(result.body).toEqual({
@@ -162,7 +176,8 @@ describe('Customers Test Suite', () => {
       it('should return 400 status code and the error', async () => {
         const result = await supertest(app)
           .put(`/customers/${customerToUpdate}`)
-          .send(invalidCustomer);
+          .send(invalidCustomer)
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(400);
         expect(result.body).toEqual({
@@ -178,7 +193,8 @@ describe('Customers Test Suite', () => {
       it('should return 400 status code and the error', async () => {
         const result = await supertest(app)
           .put('/customers/invalid')
-          .send(validCustomer());
+          .send(validCustomer())
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(400);
         expect(result.body).toEqual({
@@ -195,7 +211,8 @@ describe('Customers Test Suite', () => {
       it('should return 204 status code', async () => {
         const result = await supertest(app)
           .delete(`/customers/${customerToDelete}/`)
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(204);
       });
@@ -205,7 +222,8 @@ describe('Customers Test Suite', () => {
       it('should return 404 status code and the error', async () => {
         const result = await supertest(app)
           .delete('/customers/inexistenttt/')
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(404);
         expect(result.body).toEqual({
@@ -220,7 +238,8 @@ describe('Customers Test Suite', () => {
       it('should return 400 status code and the error', async () => {
         const result = await supertest(app)
           .delete('/customers/invalid/')
-          .send();
+          .send()
+          .set('Authorization', jtwToken);
 
         expect(result.status).toEqual(400);
         expect(result.body).toEqual({
