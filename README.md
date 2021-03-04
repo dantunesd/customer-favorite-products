@@ -98,8 +98,6 @@ curl --request POST 'http://localhost:8080/customers' \
 
 ### Response
 
-201 - Created
-
 ```json
 Status: 201 Created
 application/json; charset=utf-8
@@ -166,7 +164,6 @@ application/json; charset=utf-8
 
 ```
 DELETE /customers/{customerId}
-
 ```
 
 ```bash
