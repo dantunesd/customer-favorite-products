@@ -24,15 +24,23 @@ class FavoriteProductsRepository {
     const filter = { _id: ObjectID(customerId) };
     const projection = { projection: { _id: 0, favoriteProducts: 1 } };
 
-    return this.collection.findOne(filter, projection).then((result) => {
-      notFoundHandler(result, 'Customer');
-      return result;
-    });
+    return this.collection
+      .findOne(filter, projection)
+      .then((result) => {
+        notFoundHandler(result, 'Customer');
+        return result;
+      })
+      .then((result) => {
+        if (Object.keys(result).length !== 0) {
+          return result;
+        }
+        return { favoriteProducts: [] };
+      });
   }
 
   async deleteByCustomerIdAndProductId(customerId, productId) {
     const filter = { _id: ObjectID(customerId) };
-    const pull = { $pull: { favoriteProducts: { productId } } };
+    const pull = { $pull: { favoriteProducts: { id: productId } } };
 
     return this.collection.updateOne(filter, pull).then((result) => {
       notFoundHandler(result.result.n, 'Customer');

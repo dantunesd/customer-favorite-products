@@ -40,12 +40,18 @@ module.exports = async () => {
     name: 'toGetProduct',
     favoriteProducts: [
       {
-        productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
-        productData: 'data...',
+        price: 1.0,
+        image: 'image',
+        brand: 'brand',
+        id: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
+        title: 'title',
       },
       {
-        productId: '958ec015-cfcf-258d-c6df-1721de0ab6ea',
-        productData: 'data...',
+        price: 1.0,
+        image: 'image',
+        brand: 'brand',
+        id: '958ec015-cfcf-258d-c6df-1721de0ab6ea',
+        title: 'title',
       },
     ],
   });
@@ -56,12 +62,18 @@ module.exports = async () => {
     name: 'toDeleteProduct',
     favoriteProducts: [
       {
-        productId: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
-        productData: 'data...',
+        price: 1.0,
+        image: 'image',
+        brand: 'brand',
+        id: '1bf0f365-fbdd-4e21-9786-da459d78dd1f',
+        title: 'title',
       },
       {
-        productId: '958ec015-cfcf-258d-c6df-1721de0ab6ea',
-        productData: 'data...',
+        price: 1.0,
+        image: 'image',
+        brand: 'brand',
+        id: '958ec015-cfcf-258d-c6df-1721de0ab6ea',
+        title: 'title',
       },
     ],
   });
