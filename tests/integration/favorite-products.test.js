@@ -98,7 +98,7 @@ describe('Favorite Products Test Suite', () => {
         expect(result.status).toEqual(422);
         expect(result.body).toEqual({
           type: 'https://httpstatuses.com/422',
-          title: 'Product Not Found',
+          title: 'This product not exists',
           status: 422,
         });
       });

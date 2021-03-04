@@ -1,4 +1,4 @@
-const ProductNotFoundError = require('../errors/ProductNotFoundError');
+const BusinessError = require('../errors/BusinessError');
 const FavoriteProductsService = require('./FavoriteProductsService');
 
 const favoriteProductsRepositoryMock = {
@@ -45,13 +45,13 @@ const getResult = {
 describe('addFavoriteProduct test case', () => {
   describe('given I receive a product that not exists', () => {
     productsRepositoryMock.getById.mockRejectedValueOnce(
-      new ProductNotFoundError(),
+      new BusinessError('This product not exists'),
     );
 
-    it('should throw a ProductNotFoundError', async () => {
+    it('should throw a BusinessError', async () => {
       await expect(
         favoriteProductsService.addFavoriteProduct(1, 2),
-      ).rejects.toEqual(new ProductNotFoundError());
+      ).rejects.toEqual(new BusinessError('This product not exists'));
     });
 
     it('should call getById with params', async () => {

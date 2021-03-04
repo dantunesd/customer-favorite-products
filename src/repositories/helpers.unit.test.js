@@ -1,5 +1,5 @@
 const { MongoError } = require('mongodb');
-const DuplicatedKeyError = require('../errors/DuplicatedKeyError');
+const BusinessError = require('../errors/BusinessError');
 const NotFoundError = require('../errors/NotFoundError');
 const {
   upsertErrorHandler,
@@ -33,7 +33,7 @@ describe('upsertErrorHandler test cases', () => {
       );
       expect(() => {
         upsertErrorHandler(error);
-      }).toThrow(new DuplicatedKeyError('email'));
+      }).toThrow(new BusinessError('This email is already registered'));
     });
   });
 });
@@ -68,10 +68,10 @@ describe('productDuplicatedHandler test cases', () => {
   });
 
   describe('given I receive a document that matched and item was not added', () => {
-    it('should throw DuplicatedKeyError', async () => {
+    it('should throw BusinessError', async () => {
       expect(() => {
         productDuplicatedHandler(1, 0);
-      }).toThrow(new DuplicatedKeyError('product'));
+      }).toThrow(new BusinessError('This product is already registered'));
     });
   });
 });

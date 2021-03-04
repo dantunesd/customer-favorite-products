@@ -1,5 +1,5 @@
 const axios = require('axios').default;
-const ProductNotFoundError = require('../errors/ProductNotFoundError');
+const BusinessError = require('../errors/BusinessError');
 
 class ProductsRepository {
   constructor(productsApiUrl) {
@@ -14,7 +14,7 @@ class ProductsRepository {
       .then((response) => response.data)
       .catch((e) => {
         if (e.response.status === 404) {
-          throw new ProductNotFoundError();
+          throw new BusinessError('This product not exists');
         }
         throw e;
       });

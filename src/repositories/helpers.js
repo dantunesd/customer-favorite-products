@@ -1,5 +1,5 @@
 const { MongoError } = require('mongodb');
-const DuplicatedKeyError = require('../errors/DuplicatedKeyError');
+const BusinessError = require('../errors/BusinessError');
 const NotFoundError = require('../errors/NotFoundError');
 
 const duplicateErrorMessage = 'duplicate key error collection';
@@ -11,7 +11,7 @@ function isDuplicateKeyError(e) {
 function upsertErrorHandler(e) {
   if (isDuplicateKeyError(e)) {
     const key = e.message.match('{ (\\w+)')[1];
-    throw new DuplicatedKeyError(key);
+    throw new BusinessError(`This ${key} is already registered`);
   }
   throw e;
 }
@@ -24,7 +24,7 @@ function notFoundHandler(exists, what) {
 
 function productDuplicatedHandler(documentMatched, itemAdded) {
   if (documentMatched && !itemAdded) {
-    throw new DuplicatedKeyError('product');
+    throw new BusinessError('This product is already registered');
   }
 }
 

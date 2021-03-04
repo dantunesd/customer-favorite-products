@@ -1,9 +1,8 @@
 const ApiProblem = require('api-problem');
 const { UnauthorizedError } = require('express-jwt');
-const DuplicatedKeyError = require('../../errors/DuplicatedKeyError');
+const BusinessError = require('../../errors/BusinessError');
 const NotFoundError = require('../../errors/NotFoundError');
 const ValidationError = require('../../errors/ValidationError');
-const ProductNotFoundError = require('../../errors/ProductNotFoundError');
 
 // eslint-disable-next-line no-unused-vars
 function errorHandler(err, req, res, next) {
@@ -19,17 +18,16 @@ function errorHandler(err, req, res, next) {
       apiProblem = new ApiProblem(400, err.message);
       break;
 
-    case err instanceof DuplicatedKeyError:
-    case err instanceof ProductNotFoundError:
-      apiProblem = new ApiProblem(422, err.message);
+    case err instanceof UnauthorizedError:
+      apiProblem = new ApiProblem(401, err.message);
       break;
 
     case err instanceof NotFoundError:
       apiProblem = new ApiProblem(404, err.message);
       break;
 
-    case err instanceof UnauthorizedError:
-      apiProblem = new ApiProblem(401, err.message);
+    case err instanceof BusinessError:
+      apiProblem = new ApiProblem(422, err.message);
       break;
 
     default:
