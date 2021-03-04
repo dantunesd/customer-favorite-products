@@ -94,9 +94,9 @@ curl --request POST 'http://localhost:8080/customers' \
 }'
 ```
 
-200 Ok
-
 ### Response
+
+201 - Created
 
 ```json
 {
@@ -119,7 +119,7 @@ curl --request GET 'http://localhost:8080/customers/{customerId}' \
 
 ### Response
 
-200 Ok
+200 - Ok
 
 ```json
 {
@@ -138,8 +138,8 @@ PUT /customers/{customerId}
 ```
 
 ```bash
-curl --location -g --request PUT 'http://localhost:8080/customers/{customerId}' \
---header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSJ9.g7Rm3Ju3bdyMf-GGwCBohaRSisEUSy2b9vmSFxxqZZc' \
+curl --request PUT 'http://localhost:8080/customers/{customerId}' \
+--header 'Authorization: Bearer your-token' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "email": "email@email.com",
@@ -149,7 +149,7 @@ curl --location -g --request PUT 'http://localhost:8080/customers/{customerId}' 
 
 ### Response
 
-204 No content
+204 - No content
 
 ## Delete a customer
 
@@ -167,94 +167,72 @@ curl --request DELETE 'http://localhost:8080/customers/{customerId}' \
 
 ### Response
 
-204 No content
+204 - No content
 
-## X
-
-### Request
-
-```
-PATH
-```
-
-```bash
-COMMAND
-```
-
-### Response
-
-```json
-BODY
-```
-
-## X
+## Add a product to a customer
 
 ### Request
 
 ```
-PATH
+POST customers/{customerId}/favorite-products
 ```
 
 ```bash
-COMMAND
+curl --request POST 'http://localhost:8080/customers/{customerId}/favorite-products' \
+--header 'Authorization: Bearer your-token' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "productId": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+}'
 ```
 
 ### Response
 
-```json
-BODY
-```
+204 - No content
 
-## X
+## Get the product list of a customer
 
 ### Request
 
 ```
-PATH
+GET /customers/{customerId}/favorite-products
 ```
 
 ```bash
-COMMAND
+curl --request GET 'http://localhost:8080/customers/{customerId}/favorite-products' \
+--header 'Authorization: Bearer your-token'
 ```
 
 ### Response
 
+200 - Ok
+
 ```json
-BODY
+{
+  "favoriteProducts": [
+    {
+      "price": 1699,
+      "image": "http://challenge-api.luizalabs.com/images/1bf0f365-fbdd-4e21-9786-da459d78dd1f.jpg",
+      "id": "1bf0f365-fbdd-4e21-9786-da459d78dd1f",
+      "title": "Cadeira para Auto Iseos Bébé Confort Earth Brown"
+    }
+  ]
+}
 ```
 
-## X
+## Delete a product of a customer
 
 ### Request
 
 ```
-PATH
+DELETE /customers/{customerId}/favorite-products/{productId}
 ```
 
 ```bash
-COMMAND
+curl --request DELETE 'http://localhost:8080/customers/{customerId}/favorite-products/{productId}' \
+--header 'Authorization: Bearer your-token'
 ```
 
 ### Response
 
-```json
-BODY
-```
-
-## X
-
-### Request
-
-```
-PATH
-```
-
-```bash
-COMMAND
-```
-
-### Response
-
-```json
-BODY
-```
+204 - No Content
