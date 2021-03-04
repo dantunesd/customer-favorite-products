@@ -4,7 +4,7 @@ An API to manages customers and their favorite products
 
 ---
 
-# Pre Requirements
+# Prerequisites
 
 - `Docker 19.03`
 
@@ -76,7 +76,7 @@ Note: run `Installation` step before running integration tests.
 
 Available resources:
 
-Note: For development purposes, [generate your token](https://jwt.io/) using the jwt secret, audience and issuer found at `.env`
+Note: The token in the requests examples is for development purposes. Any changes in `JWT_SECRET`, `JWT_ISSUER` `JWT_AUDIENCE` entries at `.env` will require generate a new token.
 
 ## Create a customer
 
@@ -86,7 +86,7 @@ Note: For development purposes, [generate your token](https://jwt.io/) using the
 
 ```bash
 curl --request POST 'http://localhost:8080/customers' \
---header 'Authorization: Bearer your-token' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSIsImlhdCI6MTUxNjIzOTAyMn0.slBod5laps6nvgI3O9gymaEJ8K3wButN9cFef_28idg' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "email": "email@email.com",
@@ -112,7 +112,7 @@ Status: 201 Created
 
 ```bash
 curl --request GET 'http://localhost:8080/customers/{customerId}' \
---header 'Authorization: Bearer your-token'
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSIsImlhdCI6MTUxNjIzOTAyMn0.slBod5laps6nvgI3O9gymaEJ8K3wButN9cFef_28idg'
 ```
 
 ### Response
@@ -135,7 +135,7 @@ Status: 200 OK
 
 ```bash
 curl --request PUT 'http://localhost:8080/customers/{customerId}' \
---header 'Authorization: Bearer your-token' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSIsImlhdCI6MTUxNjIzOTAyMn0.slBod5laps6nvgI3O9gymaEJ8K3wButN9cFef_28idg' \
 --header 'Content-Type: application/json' \
 --data-raw '{
   "email": "email@email.com",
@@ -157,7 +157,7 @@ Status: 204 No Content
 
 ```bash
 curl --request DELETE 'http://localhost:8080/customers/{customerId}' \
---header 'Authorization: Bearer your-token'
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSIsImlhdCI6MTUxNjIzOTAyMn0.slBod5laps6nvgI3O9gymaEJ8K3wButN9cFef_28idg'
 ```
 
 ### Response
@@ -174,7 +174,7 @@ Status: 204 No Content
 
 ```bash
 curl --request POST 'http://localhost:8080/customers/{customerId}/favorite-products' \
---header 'Authorization: Bearer your-token' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSIsImlhdCI6MTUxNjIzOTAyMn0.slBod5laps6nvgI3O9gymaEJ8K3wButN9cFef_28idg' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "productId": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
@@ -195,7 +195,7 @@ Status: 204 No Content
 
 ```bash
 curl --request GET 'http://localhost:8080/customers/{customerId}/favorite-products' \
---header 'Authorization: Bearer your-token'
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSIsImlhdCI6MTUxNjIzOTAyMn0.slBod5laps6nvgI3O9gymaEJ8K3wButN9cFef_28idg'
 ```
 
 ### Response
@@ -223,7 +223,7 @@ Status: 200 OK
 
 ```bash
 curl --request DELETE 'http://localhost:8080/customers/{customerId}/favorite-products/{productId}' \
---header 'Authorization: Bearer your-token'
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSIsImlhdCI6MTUxNjIzOTAyMn0.slBod5laps6nvgI3O9gymaEJ8K3wButN9cFef_28idg'
 ```
 
 ### Response
