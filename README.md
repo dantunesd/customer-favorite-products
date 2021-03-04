@@ -12,7 +12,7 @@ An API to manages customers and their favorite products
 
 - `NPM + Nodejs 14.16`
 
-P.S.: if you have nvm installed in your machine, just run `nvm install` command to get the correct `NodeJs` version.
+Note: if you have nvm installed in your machine, just run `nvm install` command to get the correct `NodeJs` version.
 
 ---
 
@@ -68,13 +68,15 @@ Run integration tests:
 npm run test:integration
 ```
 
-P.S: run `Installation` step before running integration tests.
+Note: run `Installation` step before running integration tests.
 
 ---
 
 # Rest Api
 
 Available resources:
+
+PS: For development purposes, [generate your token](https://jwt.io/) using the audience, issuer and secret found at `.env`
 
 ## Create a customer
 
