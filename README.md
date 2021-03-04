@@ -76,7 +76,7 @@ Note: run `Installation` step before running integration tests.
 
 Available resources:
 
-PS: For development purposes, [generate your token](https://jwt.io/) using the jwt secret, audience and issuer found at `.env`
+Note: For development purposes, [generate your token](https://jwt.io/) using the jwt secret, audience and issuer found at `.env`
 
 ## Create a customer
 
