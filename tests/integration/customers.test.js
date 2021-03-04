@@ -12,7 +12,7 @@ const validCustomer = () => ({
   name: 'name lastname',
 });
 
-const customerToGet = '603ae34e540e915345f00f2e';
+const customerToGet = '60414460d8e584861539454d';
 const customerToUpdate = '603ae34e540e915345f00f2f';
 const customerToDelete = '603ae34e540e915345f00f2c';
 
@@ -26,11 +26,10 @@ const invalidCustomer = {
   name: 'name',
 };
 
+beforeAll(async () => {
+  await setup();
+});
 describe('Customers Test Suite', () => {
-  beforeAll(async () => {
-    await setup();
-  });
-
   describe('POST /customers', () => {
     describe('given I try to create a new customer with a valid payload', () => {
       it('should return 201 status code and an ID in body', async () => {

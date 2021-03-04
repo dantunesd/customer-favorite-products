@@ -27,11 +27,11 @@ const inexistentProduct = {
   productId: '1bf0f365-fbdd-4e21-1234-da459d78dd1f',
 };
 
-describe('Favorite Products Test Suite', () => {
-  beforeAll(async () => {
-    await setup();
-  });
+beforeAll(async () => {
+  await setup();
+});
 
+describe('Favorite Products Test Suite', () => {
   describe('POST /customers/:customerId:/favorite-products', () => {
     describe('given I try to add a product to an existing customer', () => {
       it('should return 204 status code', async () => {

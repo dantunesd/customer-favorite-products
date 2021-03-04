@@ -9,7 +9,7 @@ module.exports = async () => {
   await collection.deleteMany({}).then(async () => {
     await collection.insertMany([
       {
-        _id: ObjectId('603ae34e540e915345f00f2e'),
+        _id: ObjectId('60414460d8e584861539454d'),
         email: 'existing@email.com',
         name: 'existing name',
       },
