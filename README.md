@@ -72,7 +72,7 @@ Note: run `Installation` step before running integration tests.
 
 ---
 
-# Rest Api
+# Rest API
 
 Available resources:
 
