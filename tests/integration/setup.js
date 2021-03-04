@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { ObjectId } = require('mongodb');
 const mongoClient = require('../../src/factories/mongoClientFactory');
 

@@ -1,7 +1,5 @@
-require('dotenv').config();
 const supertest = require('supertest');
 
-const setup = require('./setup');
 const app = require('../../src/api/express-app');
 
 // eslint-disable-next-line prettier/prettier
@@ -25,12 +23,6 @@ const invalidCustomer = {
   missingEmail: '',
   name: 'name',
 };
-
-// eslint-disable-next-line jest/no-done-callback
-beforeAll(async (done) => {
-  await setup();
-  done();
-});
 
 describe('Customers Test Suite', () => {
   describe('POST /customers', () => {

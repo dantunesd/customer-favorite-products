@@ -1,7 +1,5 @@
-require('dotenv').config();
 const supertest = require('supertest');
 
-const setup = require('./setup');
 const app = require('../../src/api/express-app');
 
 // eslint-disable-next-line prettier/prettier
@@ -26,12 +24,6 @@ const invalidProduct = {
 const inexistentProduct = {
   productId: '1bf0f365-fbdd-4e21-1234-da459d78dd1f',
 };
-
-// eslint-disable-next-line jest/no-done-callback
-beforeAll(async (done) => {
-  await setup();
-  done();
-});
 
 describe('Favorite Products Test Suite', () => {
   describe('POST /customers/:customerId:/favorite-products', () => {
