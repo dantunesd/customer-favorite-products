@@ -110,9 +110,7 @@ Status: 201 Created
 
 ### Request
 
-```
-GET /customers/{customerId}
-```
+`GET /customers/{customerId}`
 
 ```bash
 curl --request GET 'http://localhost:8080/customers/{customerId}' \
@@ -135,9 +133,7 @@ Status: 200 OK
 
 ### Request
 
-```
-PUT /customers/{customerId}
-```
+`PUT /customers/{customerId}`
 
 ```bash
 curl --request PUT 'http://localhost:8080/customers/{customerId}' \
@@ -159,9 +155,7 @@ Status: 204 No Content
 
 ### Request
 
-```
-DELETE /customers/{customerId}
-```
+`DELETE /customers/{customerId}`
 
 ```bash
 curl --request DELETE 'http://localhost:8080/customers/{customerId}' \
@@ -178,9 +172,7 @@ Status: 204 No Content
 
 ### Request
 
-```
-POST customers/{customerId}/favorite-products
-```
+`POST customers/{customerId}/favorite-products`
 
 ```bash
 curl --request POST 'http://localhost:8080/customers/{customerId}/favorite-products' \
@@ -201,9 +193,7 @@ Status: 204 No Content
 
 ### Request
 
-```
-GET /customers/{customerId}/favorite-products
-```
+`GET /customers/{customerId}/favorite-products`
 
 ```bash
 curl --request GET 'http://localhost:8080/customers/{customerId}/favorite-products' \
@@ -231,9 +221,7 @@ Status: 200 OK
 
 ### Request
 
-```
-DELETE /customers/{customerId}/favorite-products/{productId}
-```
+`DELETE /customers/{customerId}/favorite-products/{productId}`
 
 ```bash
 curl --request DELETE 'http://localhost:8080/customers/{customerId}/favorite-products/{productId}' \
