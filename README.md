@@ -24,7 +24,7 @@ Install dependencies
 npm install
 ```
 
-Create a `.env` file and change to your needs:
+Create a `.env` file:
 
 ```bash
 cp .env.example .env
@@ -38,19 +38,9 @@ docker-compose up
 
 Optional:
 
-set `PRODUCTS_API_URL='http://challenge-api.luizalabs.com/api/product/%/'` entry at `.env` to send requests to LuizaLabs's products API.
+Set `PRODUCTS_API_URL=http://challenge-api.luizalabs.com/api/product/%/` entry at `.env` to send requests to LuizaLabs's products API.
 
----
-
-# Start API locally
-
-Run the following command:
-
-```bash
-npm start
-```
-
-A Postman collection can be [found here](https://github.com/dantunesd/customer-favorite-products/blob/main/docs/customer-favorite-products.postman_collection.json) to help you with the requests. See how to import [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman).
+You can access a visual interface for mongodb at `http://localhost:8081/`
 
 ---
 
@@ -72,11 +62,23 @@ Note: run `Installation` step before running integration tests.
 
 ---
 
+# Start API locally
+
+Run the following command:
+
+```bash
+npm start
+```
+
+---
+
 # Rest API
 
 Available resources:
 
-Note: The token in the requests examples is for development purposes. Any changes in `JWT_SECRET`, `JWT_ISSUER` `JWT_AUDIENCE` entries at `.env` will require generate a new token.
+Note 1: A Postman collection can be [found here](https://github.com/dantunesd/customer-favorite-products/blob/main/docs/customer-favorite-products.postman_collection.json) to help you with the requests. See how to import [here](https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#importing-data-into-postman).
+
+Note 2: The token in the requests examples is for development purposes. Any changes in `JWT_SECRET`, `JWT_ISSUER` `JWT_AUDIENCE` entries at `.env` will require generate a new token.
 
 ## Create a customer
 
