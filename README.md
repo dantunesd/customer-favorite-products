@@ -10,7 +10,7 @@ An API to manages customers and their favorite products
 
 - `Docker Compose 1.25`
 
-- `NPM + Nodejs 14.16`
+- `Nodejs 14.16`
 
 Note: if you have nvm installed in your machine, just run `nvm install` command to get the correct `NodeJs` version.
 
@@ -30,10 +30,10 @@ Create a `.env` file and change to your needs:
 cp .env.example .env
 ```
 
-Start DB and MockServer:
+Start db and mockserver and wait them to be ready:
 
 ```bash
-docker-compose up -d
+docker-compose up
 ```
 
 Optional:
