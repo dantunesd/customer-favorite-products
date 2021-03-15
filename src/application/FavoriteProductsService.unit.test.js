@@ -1,3 +1,4 @@
+const ProductEntity = require('../domain/ProductEntity');
 const FavoriteProductsService = require('./FavoriteProductsService');
 
 const favoriteProductsRepositoryMock = {
@@ -15,20 +16,7 @@ const favoriteProductsService = new FavoriteProductsService(
   productsRepositoryMock,
 );
 
-const product = {
-  price: 1.0,
-  image: 'example',
-  brand: 'example',
-  id: 'example',
-  title: 'example',
-};
-
-const productToBeSaved = {
-  price: 1.0,
-  image: 'example',
-  id: 'example',
-  title: 'example',
-};
+const product = new ProductEntity('id', 1.0, 'title', 'image', 123456);
 
 const getResult = {
   favoriteProducts: [
@@ -106,7 +94,7 @@ describe('addFavoriteProduct test case', () => {
     it('should call addByCustomerId with params', async () => {
       expect(
         favoriteProductsRepositoryMock.addByCustomerId,
-      ).toHaveBeenLastCalledWith(1, productToBeSaved);
+      ).toHaveBeenLastCalledWith(1, product);
     });
   });
 
@@ -128,7 +116,7 @@ describe('addFavoriteProduct test case', () => {
     it('should call addByCustomerId with params', async () => {
       expect(
         favoriteProductsRepositoryMock.addByCustomerId,
-      ).toHaveBeenLastCalledWith(1, productToBeSaved);
+      ).toHaveBeenLastCalledWith(1, product);
     });
   });
 });

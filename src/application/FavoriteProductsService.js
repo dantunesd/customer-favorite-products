@@ -5,16 +5,11 @@ class FavoriteProductsService {
   }
 
   async addFavoriteProduct(customerId, productId) {
-    const product = await this.productsRepository.getById(productId);
-
-    const productWithoutBrand = {
-      ...product,
-    };
-    delete productWithoutBrand.brand;
+    const productEntity = await this.productsRepository.getById(productId);
 
     return this.favoriteProductsRepository.addByCustomerId(
       customerId,
-      productWithoutBrand,
+      productEntity,
     );
   }
 

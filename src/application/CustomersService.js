@@ -7,16 +7,16 @@ class CustomersService {
     return this.customersRepository.create(customerEntity);
   }
 
+  async updateCustomer(customerEntity) {
+    return this.customersRepository.updateById(customerEntity);
+  }
+
   async getCustomer(customerId) {
     return this.customersRepository.getById(customerId);
   }
 
   async deleteCustomer(customerId) {
     return this.customersRepository.deleteById(customerId);
-  }
-
-  async updateCustomer(customerEntity) {
-    return this.customersRepository.updateById(customerEntity);
   }
 }
 

@@ -9,9 +9,9 @@ class FavoriteProductsRepository {
     this.collection = mongoClient.db(dbName).collection(collectionName);
   }
 
-  async addByCustomerId(customerId, product) {
+  async addByCustomerId(customerId, productEntity) {
     const filter = { _id: ObjectID(customerId) };
-    const addToSet = { $addToSet: { favoriteProducts: product } };
+    const addToSet = { $addToSet: { favoriteProducts: productEntity } };
 
     return this.collection.updateOne(filter, addToSet).then((res) => {
       const { result } = res;
