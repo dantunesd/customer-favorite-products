@@ -1,6 +1,6 @@
 const supertest = require('supertest');
 
-const app = require('../../src/api/express-app');
+const app = require('../../src/presentation/express-app');
 
 // eslint-disable-next-line prettier/prettier
 const jtwToken = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJteS1kZXZlbG9wbWVudC1pc3N1ZXIiLCJhdWQiOiJteS1kZXZlbG9wbWVudC1hdWRpZW5jZSJ9.g7Rm3Ju3bdyMf-GGwCBohaRSisEUSy2b9vmSFxxqZZc';

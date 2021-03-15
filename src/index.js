@@ -1,5 +1,5 @@
 require('dotenv').config();
-const expressApp = require('./api/express-app');
+const expressApp = require('./presentation/express-app');
 const { APP_PORT } = require('./infrastructure/environment');
 const logger = require('./infrastructure/logger');
 
