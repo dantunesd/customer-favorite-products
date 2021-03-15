@@ -1,3 +1,4 @@
+const CustomerEntity = require('../domain/CustomerEntity');
 const CustomersService = require('./CustomersService');
 
 const customersRepositoryMock = {
@@ -7,16 +8,9 @@ const customersRepositoryMock = {
   updateById: jest.fn(),
 };
 
-const customerToSave = {
-  email: 'email',
-  name: 'name',
-};
-
-const customerFromDb = {
-  _id: 'objectId',
-  email: 'email',
-  name: 'name',
-};
+const customerToSave = new CustomerEntity(null, 'name', 'email');
+const customerToUpdate = new CustomerEntity('toUpdate', 'name', 'email');
+const customerFromDb = new CustomerEntity('objectId', 'name', 'email');
 
 const customersService = new CustomersService(customersRepositoryMock);
 
@@ -78,14 +72,13 @@ describe('updateCustomer test case', () => {
 
     it('should update customer with success', async () => {
       await expect(
-        customersService.updateCustomer(1, customerToSave),
+        customersService.updateCustomer(customerToUpdate),
       ).resolves.toBeUndefined();
     });
 
     it('should call updateById with params', async () => {
       expect(customersRepositoryMock.updateById).toHaveBeenLastCalledWith(
-        1,
-        customerToSave,
+        customerToUpdate,
       );
     });
   });

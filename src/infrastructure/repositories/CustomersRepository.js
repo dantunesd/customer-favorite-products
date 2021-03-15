@@ -1,4 +1,5 @@
 const { ObjectID } = require('mongodb');
+const CustomerEntity = require('../../domain/CustomerEntity');
 const { upsertErrorHandler, notFoundHandler } = require('./helpers');
 
 const dbName = 'customerFavoriteProductsDB';
@@ -9,9 +10,9 @@ class CustomersRepository {
     this.collection = mongoClient.db(dbName).collection(collectionName);
   }
 
-  async create(customerData) {
+  async create(customerEntity) {
     return this.collection
-      .insertOne(customerData)
+      .insertOne(customerEntity)
       .then((result) => result.insertedId)
       .catch(upsertErrorHandler);
   }
@@ -22,7 +23,8 @@ class CustomersRepository {
 
     return this.collection.findOne(filter, projection).then((result) => {
       notFoundHandler(result, 'Customer');
-      return result;
+      // eslint-disable-next-line no-underscore-dangle
+      return new CustomerEntity(result._id, result.name, result.email);
     });
   }
 
@@ -34,9 +36,9 @@ class CustomersRepository {
     });
   }
 
-  async updateById(customerId, customerData) {
-    const filter = { _id: ObjectID(customerId) };
-    const fields = { $set: customerData };
+  async updateById(customerEntity) {
+    const filter = { _id: ObjectID(customerEntity.getId()) };
+    const fields = { $set: customerEntity };
 
     return this.collection
       .updateOne(filter, fields)

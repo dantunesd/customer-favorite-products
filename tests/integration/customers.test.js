@@ -82,7 +82,7 @@ describe('Customers Test Suite', () => {
 
         expect(result.status).toEqual(200);
         expect(result.body).toEqual({
-          _id: customerToGet,
+          id: customerToGet,
           email: 'existing@email.com',
           name: 'existing name',
         });

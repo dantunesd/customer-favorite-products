@@ -3,8 +3,8 @@ class CustomersService {
     this.customersRepository = customersRepository;
   }
 
-  async createCustomer(customerData) {
-    return this.customersRepository.create(customerData);
+  async createCustomer(customerEntity) {
+    return this.customersRepository.create(customerEntity);
   }
 
   async getCustomer(customerId) {
@@ -15,8 +15,8 @@ class CustomersService {
     return this.customersRepository.deleteById(customerId);
   }
 
-  async updateCustomer(customerId, customerData) {
-    return this.customersRepository.updateById(customerId, customerData);
+  async updateCustomer(customerEntity) {
+    return this.customersRepository.updateById(customerEntity);
   }
 }
 
