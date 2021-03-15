@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-const ValidationError = require('../../errors/ValidationError');
+const ValidationError = require('../../infrastructure/errors/ValidationError');
 
 function customerIdValidator(req, res, next) {
   const { customerId } = req.params;

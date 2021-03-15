@@ -1,6 +1,6 @@
 const express = require('express');
 
-const favoriteProductsService = require('../../factories/favoriteProductsServiceFactory');
+const favoriteProductsService = require('../../infrastructure/factories/favoriteProductsServiceFactory');
 const productDataValidator = require('../middlewares/productDataValidator');
 const customerIdValidator = require('../middlewares/customerIdValidator');
 

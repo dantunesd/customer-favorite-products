@@ -1,6 +1,6 @@
 const Ajv = require('ajv').default;
 const ajvFormats = require('ajv-formats').default;
-const ValidationError = require('../../errors/ValidationError');
+const ValidationError = require('../../infrastructure/errors/ValidationError');
 const customerSchema = require('../schemas/customerData.json');
 
 const ajv = new Ajv({

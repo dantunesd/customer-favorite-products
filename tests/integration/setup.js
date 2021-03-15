@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const { ObjectId } = require('mongodb');
-const mongoClient = require('../../src/factories/mongoClientFactory');
+const mongoClient = require('../../src/infrastructure/factories/mongoClientFactory');
 
 const dbName = 'customerFavoriteProductsDB';
 const collectionName = 'customersFavoriteProducts';

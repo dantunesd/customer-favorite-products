@@ -1,7 +1,7 @@
 const express = require('express');
 
 const customersFavoriteProductsRouter = require('./customers-favorite-products');
-const customersService = require('../../factories/customersServiceFactory');
+const customersService = require('../../infrastructure/factories/customersServiceFactory');
 const customerDataValidator = require('../middlewares/customerDataValidator');
 const customerIdValidator = require('../middlewares/customerIdValidator');
 

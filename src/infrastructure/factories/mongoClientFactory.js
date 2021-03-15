@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const { DB_URL } = require('../infrastructure/environment');
+const { DB_URL } = require('../environment');
 
 const mongoClient = new MongoClient(DB_URL, {
   useUnifiedTopology: true,

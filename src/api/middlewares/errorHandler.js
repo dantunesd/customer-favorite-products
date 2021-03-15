@@ -1,8 +1,8 @@
 const ApiProblem = require('api-problem');
 const { UnauthorizedError } = require('express-jwt');
-const BusinessError = require('../../errors/BusinessError');
-const NotFoundError = require('../../errors/NotFoundError');
-const ValidationError = require('../../errors/ValidationError');
+const BusinessError = require('../../infrastructure/errors/BusinessError');
+const NotFoundError = require('../../infrastructure/errors/NotFoundError');
+const ValidationError = require('../../infrastructure/errors/ValidationError');
 
 function errorHandler(err, req, res, next) {
   let apiProblem;

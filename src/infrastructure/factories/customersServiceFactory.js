@@ -1,5 +1,5 @@
 const mongoClient = require('./mongoClientFactory');
-const CustomersService = require('../services/CustomersService');
+const CustomersService = require('../../application/CustomersService');
 const CustomersRepository = require('../repositories/CustomersRepository');
 
 const customersRepository = new CustomersRepository(mongoClient);

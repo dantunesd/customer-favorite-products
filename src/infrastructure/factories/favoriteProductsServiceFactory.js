@@ -1,6 +1,6 @@
-const { PRODUCTS_API_URL } = require('../infrastructure/environment');
+const { PRODUCTS_API_URL } = require('../environment');
 const mongoClient = require('./mongoClientFactory');
-const FavoriteProductsService = require('../services/FavoriteProductsService');
+const FavoriteProductsService = require('../../application/FavoriteProductsService');
 const FavoriteProductsRepository = require('../repositories/FavoriteProductsRepository');
 const ProductsRepository = require('../repositories/ProductsRepository');
 
