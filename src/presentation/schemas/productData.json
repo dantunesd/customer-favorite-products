@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Product Data",
+  "description": "The representation of a Product",
+  "type": "object",
+  "examples": [
+    {
+      "productId": "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+    }
+  ],
+  "required": [
+    "productId"
+  ],
+  "properties": {
+    "productId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "the Product Id",
+      "examples": [
+        "1bf0f365-fbdd-4e21-9786-da459d78dd1f"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

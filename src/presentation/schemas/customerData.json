@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "Customer Data",
+  "description": "The representation of a customer",
+  "type": "object",
+  "examples": [
+    {
+      "email": "email@email.com",
+      "name": "Name Lastname"
+    }
+  ],
+  "required": [
+    "email",
+    "name"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "the customer email",
+      "examples": [
+        "email@email.com"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "The customer name",
+      "minLength": 3,
+      "maxLength": 100,
+        "examples": [
+          "Name Lastname"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

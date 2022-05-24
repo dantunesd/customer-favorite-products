@@ -1,0 +1,66 @@
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/product/1bf0f365-fbdd-4e21-9786-da459d78dd1f/"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "price": 1699.0,
+        "image": "http://host.com/images/1bf0f365-fbdd-4e21-9786-da459d78dd1f.jpg",
+        "brand": "bébé confort",
+        "id": "1bf0f365-fbdd-4e21-9786-da459d78dd1f",
+        "title": "Cadeira para Auto Iseos Bébé Confort Earth Brown"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/product/958ec015-cfcf-258d-c6df-1721de0ab6ea/"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "price": 1149.0,
+        "image": "http://host.com/images/958ec015-cfcf-258d-c6df-1721de0ab6ea.jpg",
+        "brand": "bébé confort",
+        "id": "958ec015-cfcf-258d-c6df-1721de0ab6ea",
+        "title": "Moisés Dorel Windoo 1529"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/product/6a512e6c-6627-d286-5d18-583558359ab6/"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "body": {
+        "price": 1149.0,
+        "image": "http://host.com/images/6a512e6c-6627-d286-5d18-583558359ab6.jpg",
+        "brand": "bébé confort",
+        "id": "6a512e6c-6627-d286-5d18-583558359ab6",
+        "title": "Moisés Dorel Windoo 1529"
+     }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/api/product/{productId}/",
+      "pathParameters": {
+        "productId": [".+"]
+      }
+    },
+    "httpResponse": {
+      "statusCode": 404,
+      "body" : {
+        "error_message": "Product {productId} not found",
+        "code": "not_found"
+      }
+    }
+  }
+]
